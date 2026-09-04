@@ -1,8 +1,13 @@
 const Database = require('better-sqlite3');
+const fs = require('fs');
 const path = require('path');
-const bcrypt = require('bcryptjs');
 
-const db = new Database(path.join(__dirname, '..', 'data', 'app.db'));
+const dataDir = path.join(__dirname, '..', 'data');
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+
+const db = new Database(path.join(dataDir, 'app.db'));
 db.pragma('journal_mode = WAL');
 
 db.exec(`

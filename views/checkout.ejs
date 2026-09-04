@@ -1,41 +1,207 @@
-<% pageTitle = 'Complete Payment - EventBook' %>
+<% pageTitle = 'Complete Payment - Vertex' %>
+
 <%- include('partials/header') %>
 
-<div class="form-page">
-  <h1>Complete Your Payment</h1>
-  <p class="form-sub">Booking Ref: <strong><%= booking.booking_ref %></strong></p>
+<main class="payment-page">
 
-  <div class="order-summary">
-    <h3><%= event.title %></h3>
-    <% if (booking.category_name) { %><p class="category-badge"><%= booking.category_name %></p><% } %>
-    <p><%= booking.quantity %> ticket(s) &times; ₹<%= booking.unit_price %></p>
-    <p class="total-amount">Total: ₹<%= booking.total_amount %></p>
+  <div class="payment-container">
+
+    <!-- HEADER -->
+    <div class="payment-intro">
+      <span class="vertex-eyebrow">COMPLETE YOUR BOOKING</span>
+
+      <h1>Enter the Mehfil.</h1>
+
+      <p>
+        Complete your payment to secure your place for this
+        unforgettable evening.
+      </p>
+    </div>
+
+
+    <!-- BOOKING REFERENCE -->
+    <div class="booking-reference">
+      <span>BOOKING REFERENCE</span>
+      <strong><%= booking.booking_ref %></strong>
+    </div>
+
+
+    <!-- PAYMENT GRID -->
+    <div class="payment-grid">
+
+      <!-- LEFT: ORDER SUMMARY -->
+      <section class="payment-panel order-panel">
+
+        <span class="panel-eyebrow">YOUR BOOKING</span>
+
+        <h2><%= event.title %></h2>
+
+        <% if (booking.category_name) { %>
+          <span class="payment-category">
+            <%= booking.category_name %>
+          </span>
+        <% } %>
+
+        <div class="booking-details">
+
+          <div class="booking-detail">
+            <span>Tickets</span>
+            <strong><%= booking.quantity %></strong>
+          </div>
+
+          <div class="booking-detail">
+            <span>Price per ticket</span>
+            <strong>₹<%= booking.unit_price %></strong>
+          </div>
+
+        </div>
+
+        <div class="payment-total">
+          <span>Total Amount</span>
+          <strong>₹<%= booking.total_amount %></strong>
+        </div>
+
+      </section>
+
+
+      <!-- RIGHT: QR PAYMENT -->
+      <section class="payment-panel qr-panel">
+
+        <span class="panel-eyebrow">SCAN & PAY</span>
+
+        <h2>Make the payment.</h2>
+
+        <p class="qr-description">
+          Scan the QR code using your preferred UPI app
+          and complete the payment.
+        </p>
+
+        <% if (admin && admin.qr_image) { %>
+
+          <div class="qr-wrapper">
+            <img
+              src="<%= admin.qr_image %>"
+              alt="Payment QR Code"
+              class="payment-qr"
+            />
+          </div>
+
+        <% } else { %>
+
+          <div class="payment-error">
+            Payment QR code has not been set up yet.
+            Please contact the organizer.
+          </div>
+
+        <% } %>
+
+        <% if (admin && admin.payment_note) { %>
+
+          <p class="payment-note">
+            <%= admin.payment_note %>
+          </p>
+
+        <% } %>
+
+      </section>
+
+    </div>
+
+
+    <!-- ERROR -->
+    <% if (error) { %>
+
+      <div class="payment-alert">
+        <%= error %>
+      </div>
+
+    <% } %>
+
+
+    <!-- PAYMENT PROOF -->
+    <section class="payment-proof">
+
+      <div class="proof-heading">
+
+        <span class="panel-eyebrow">PAYMENT PROOF</span>
+
+        <h2>Almost there.</h2>
+
+        <p>
+          Upload your transaction screenshot so we can verify
+          your payment.
+        </p>
+
+      </div>
+
+
+      <form
+        action="/checkout/<%= booking.id %>/submit"
+        method="POST"
+        enctype="multipart/form-data"
+        class="payment-form"
+      >
+
+        <div class="payment-field">
+
+          <label for="screenshot">
+            TRANSACTION SCREENSHOT
+            <span class="required">*</span>
+          </label>
+
+          <input
+            type="file"
+            id="screenshot"
+            name="screenshot"
+            accept="image/*"
+            required
+          />
+
+          <small>
+            Upload a clear screenshot showing your successful payment.
+          </small>
+
+        </div>
+
+
+        <div class="payment-field">
+
+          <label for="transaction_note">
+            TRANSACTION / UPI REFERENCE ID
+            <span class="optional">(OPTIONAL)</span>
+          </label>
+
+          <input
+            type="text"
+            id="transaction_note"
+            name="transaction_note"
+            placeholder="e.g. UPI Ref No."
+          />
+
+        </div>
+
+
+        <button type="submit" class="payment-submit">
+
+          <span>Submit Payment Proof</span>
+
+          <span class="arrow">→</span>
+
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- FOOTNOTE -->
+    <p class="payment-footnote">
+      Your ticket will be generated once the organizer verifies
+      your payment. You can check your booking status after submission.
+    </p>
+
   </div>
 
-  <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
-
-  <div class="qr-pay-box">
-    <h3>Scan &amp; Pay</h3>
-    <% if (admin && admin.qr_image) { %>
-      <img src="<%= admin.qr_image %>" alt="Payment QR Code" class="qr-image" />
-    <% } else { %>
-      <div class="alert-error">Payment QR code has not been set up yet. Please contact the organizer.</div>
-    <% } %>
-    <% if (admin && admin.payment_note) { %>
-      <p class="payment-note"><%= admin.payment_note %></p>
-    <% } %>
-  </div>
-
-  <form action="/checkout/<%= booking.id %>/submit" method="POST" enctype="multipart/form-data" class="card-form">
-    <label for="screenshot">Upload Transaction Screenshot <span class="required">*</span></label>
-    <input type="file" id="screenshot" name="screenshot" accept="image/*" required />
-
-    <label for="transaction_note">Transaction / UPI Reference ID (optional)</label>
-    <input type="text" id="transaction_note" name="transaction_note" placeholder="e.g. UPI Ref No." />
-
-    <button type="submit" class="btn-primary full-width">Submit Payment Proof</button>
-  </form>
-  <p class="fine-print">Your ticket will be generated once the organizer verifies your payment. You'll be able to check the status on the next page.</p>
-</div>
+</main>
 
 <%- include('partials/footer') %>

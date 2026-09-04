@@ -1,108 +1,441 @@
-<% pageTitle = event.title + ' - EventBook' %>
+<% pageTitle = event.title + ' - Vertex' %>
+
 <%- include('partials/header') %>
 
-<div class="event-detail">
-  <a href="/" class="back-link">&larr; Back</a>
+<main class="vertex-event-detail">
 
-  <div class="carousel" data-carousel>
-    <div class="carousel-track" data-track>
-      <% if (event.imageList.length > 0) { %>
-        <% event.imageList.forEach(img => { %>
-          <div class="carousel-slide"><img src="<%= img %>" alt="<%= event.title %>" /></div>
-        <% }) %>
-      <% } else { %>
-        <div class="carousel-slide"><div class="no-image large">No Image Available</div></div>
-      <% } %>
-    </div>
-    <% if (event.imageList.length > 1) { %>
-      <button class="carousel-btn prev" data-prev aria-label="Previous">&#10094;</button>
-      <button class="carousel-btn next" data-next aria-label="Next">&#10095;</button>
-      <div class="carousel-dots" data-dots>
-        <% event.imageList.forEach((img, i) => { %>
-          <span class="dot <%= i === 0 ? 'active' : '' %>" data-dot="<%= i %>"></span>
-        <% }) %>
+  <!-- BACK -->
+  <div class="vertex-detail-container">
+    <a href="/" class="vertex-back-link">
+      ← Back to events
+    </a>
+  </div>
+
+
+  <!-- EVENT HERO / CAROUSEL -->
+  <section class="vertex-detail-hero">
+
+    <div class="vertex-detail-container">
+
+      <div class="vertex-detail-carousel carousel" data-carousel>
+
+        <div class="carousel-track" data-track>
+
+          <% if (event.imageList.length > 0) { %>
+
+            <% event.imageList.forEach(img => { %>
+
+              <div class="carousel-slide">
+                <img
+                  src="<%= img %>"
+                  alt="<%= event.title %>"
+                />
+              </div>
+
+            <% }) %>
+
+          <% } else { %>
+
+            <div class="carousel-slide">
+              <div class="vertex-no-image-large">
+                NO IMAGE AVAILABLE
+              </div>
+            </div>
+
+          <% } %>
+
+        </div>
+
+
+        <% if (event.imageList.length > 1) { %>
+
+          <button
+            class="carousel-btn prev"
+            data-prev
+            aria-label="Previous image"
+          >
+            ←
+          </button>
+
+          <button
+            class="carousel-btn next"
+            data-next
+            aria-label="Next image"
+          >
+            →
+          </button>
+
+
+          <div class="carousel-dots" data-dots>
+
+            <% event.imageList.forEach((img, i) => { %>
+
+              <span
+                class="dot <%= i === 0 ? 'active' : '' %>"
+                data-dot="<%= i %>"
+              ></span>
+
+            <% }) %>
+
+          </div>
+
+        <% } %>
+
       </div>
-    <% } %>
-  </div>
 
-  <h1 class="event-title"><%= event.title %></h1>
-  <% if (event.category) { %><span class="event-tag static"><%= event.category %></span><% } %>
-
-  <div class="interest-box">
-    <div>
-      <p class="interest-count">👍 <%= event.interested_count %> are interested</p>
-      <p class="interest-sub">Mark interested to know more about this event.</p>
     </div>
-    <form action="/event/<%= event.id %>/interest" method="POST">
-      <button type="submit" class="btn-outline-small <%= interested ? 'active' : '' %>">
-        <%= interested ? 'Interested ✓' : 'Interested?' %>
-      </button>
-    </form>
-  </div>
 
-  <div class="detail-list">
-    <div class="detail-row">📅 <span><%= event.start_date %><% if (event.end_date && event.end_date !== event.start_date) { %> - <%= event.end_date %><% } %></span></div>
-    <% if (event.event_time) { %><div class="detail-row">🕗 <span><%= event.event_time %></span></div><% } %>
-    <% if (event.duration) { %><div class="detail-row">⏳ <span><%= event.duration %></span></div><% } %>
-    <% if (event.age_limit) { %><div class="detail-row">👥 <span>Age Limit - <%= event.age_limit %></span></div><% } %>
-    <% if (event.languages) { %><div class="detail-row">🌐 <span><%= event.languages %></span></div><% } %>
-    <% if (event.venue) { %><div class="detail-row">📍 <span><%= event.venue %></span></div><% } %>
-  </div>
+  </section>
 
-<% if (event.description) { %>
-  <div class="about-event">
-    <h3>About The Event</h3>
-    <p id="about-text" class="about-text truncated"><%= event.description %></p>
-    <button type="button" id="about-toggle" class="read-more-link">Read More</button>
-  </div>
-<% } %>
 
-<% if (event.terms_conditions) { %>
-  <div class="tnc-accordion">
-    <button type="button" class="tnc-header" id="tnc-toggle">
-      <span>Terms &amp; Conditions</span>
-      <span class="tnc-arrow">&#9656;</span>
-    </button>
-    <div class="tnc-body" id="tnc-body" hidden>
-      <ul>
-        <% event.terms_conditions.split('\n').map(l => l.trim()).filter(Boolean).forEach(line => { %>
-          <li><%= line %></li>
-        <% }) %>
-      </ul>
+  <!-- EVENT INFORMATION -->
+  <section class="vertex-event-info">
+
+    <div class="vertex-detail-container">
+
+      <div class="vertex-event-heading">
+
+        <% if (event.category) { %>
+
+          <span class="vertex-event-category">
+            <%= event.category %>
+          </span>
+
+        <% } %>
+
+        <h1>
+          <%= event.title %>
+        </h1>
+
+        <p class="vertex-event-intro">
+          An evening of soulful melodies, timeless voices
+          and unforgettable moments.
+        </p>
+
+      </div>
+
+
+      <!-- EVENT DETAILS -->
+      <div class="vertex-detail-grid">
+
+        <div class="vertex-detail-content">
+
+          <div class="vertex-details-list">
+
+            <div class="vertex-detail-row">
+              <span class="vertex-detail-icon">◷</span>
+
+              <div>
+                <small>DATE</small>
+
+                <strong>
+                  <%= event.start_date %>
+
+                  <% if (
+                    event.end_date &&
+                    event.end_date !== event.start_date
+                  ) { %>
+
+                    — <%= event.end_date %>
+
+                  <% } %>
+                </strong>
+              </div>
+            </div>
+
+
+            <% if (event.event_time) { %>
+
+              <div class="vertex-detail-row">
+
+                <span class="vertex-detail-icon">◴</span>
+
+                <div>
+                  <small>TIME</small>
+                  <strong><%= event.event_time %></strong>
+                </div>
+
+              </div>
+
+            <% } %>
+
+
+            <% if (event.duration) { %>
+
+              <div class="vertex-detail-row">
+
+                <span class="vertex-detail-icon">◫</span>
+
+                <div>
+                  <small>DURATION</small>
+                  <strong><%= event.duration %></strong>
+                </div>
+
+              </div>
+
+            <% } %>
+
+
+            <% if (event.age_limit) { %>
+
+              <div class="vertex-detail-row">
+
+                <span class="vertex-detail-icon">◉</span>
+
+                <div>
+                  <small>AGE LIMIT</small>
+                  <strong><%= event.age_limit %></strong>
+                </div>
+
+              </div>
+
+            <% } %>
+
+
+            <% if (event.languages) { %>
+
+              <div class="vertex-detail-row">
+
+                <span class="vertex-detail-icon">Aa</span>
+
+                <div>
+                  <small>LANGUAGE</small>
+                  <strong><%= event.languages %></strong>
+                </div>
+
+              </div>
+
+            <% } %>
+
+
+            <% if (event.venue) { %>
+
+              <div class="vertex-detail-row">
+
+                <span class="vertex-detail-icon">⌖</span>
+
+                <div>
+                  <small>VENUE</small>
+                  <strong><%= event.venue %></strong>
+                </div>
+
+              </div>
+
+            <% } %>
+
+          </div>
+
+
+          <!-- ABOUT -->
+          <% if (event.description) { %>
+
+            <div class="vertex-about">
+
+              <span class="vertex-section-label">
+                ABOUT THE EVENT
+              </span>
+
+              <h2>
+                A night to remember.
+              </h2>
+
+              <p
+                id="about-text"
+                class="vertex-about-text truncated"
+              >
+                <%= event.description %>
+              </p>
+
+              <button
+                type="button"
+                id="about-toggle"
+                class="vertex-read-more"
+              >
+                Read More →
+              </button>
+
+            </div>
+
+          <% } %>
+
+
+          <!-- TERMS -->
+          <% if (event.terms_conditions) { %>
+
+            <div class="vertex-tnc">
+
+              <button
+                type="button"
+                class="vertex-tnc-header"
+                id="tnc-toggle"
+              >
+
+                <span>
+                  Terms & Conditions
+                </span>
+
+                <span class="vertex-tnc-arrow">
+                  →
+                </span>
+
+              </button>
+
+
+              <div
+                class="vertex-tnc-body"
+                id="tnc-body"
+                hidden
+              >
+
+                <ul>
+
+                  <% event.terms_conditions
+                    .split('\n')
+                    .map(l => l.trim())
+                    .filter(Boolean)
+                    .forEach(line => {
+                  %>
+
+                    <li>
+                      <%= line %>
+                    </li>
+
+                  <% }) %>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+          <% } %>
+
+        </div>
+
+
+        <!-- BOOKING CARD -->
+        <aside class="vertex-booking-card">
+
+          <span class="vertex-section-label">
+            YOUR EVENING AWAITS
+          </span>
+
+          <h3>
+            Reserve your place<br>
+            in the Mehfil.
+          </h3>
+
+          <div class="vertex-booking-divider"></div>
+
+          <div class="vertex-booking-price">
+
+            <small>
+              TICKETS FROM
+            </small>
+
+            <strong>
+              ₹<%= event.price %>
+            </strong>
+
+            <span>
+              onwards
+            </span>
+
+          </div>
+
+          <div class="vertex-availability">
+            <span></span>
+            Available
+          </div>
+
+          <a
+            href="/book/<%= event.id %>"
+            class="vertex-book-btn"
+          >
+            <span>Book Now</span>
+            <span>→</span>
+          </a>
+
+        </aside>
+
+      </div>
+
     </div>
-  </div>
-<% } %>
 
-  <div class="sticky-book-bar">
-    <div>
-      <div class="price-tag">₹<%= event.price %> onwards</div>
-      <div class="avail-tag">Available</div>
-    </div>
-    <a href="/book/<%= event.id %>" class="btn-primary">Book Now</a>
-  </div>
-</div>
+  </section>
+
+</main>
+
 
 <%- include('partials/footer') %>
 
-<script>
-  (function () {
-    const aboutText = document.getElementById('about-text');
-    const aboutToggle = document.getElementById('about-toggle');
-    if (aboutText && aboutToggle) {
-      aboutToggle.addEventListener('click', function () {
-        const collapsed = aboutText.classList.toggle('truncated');
-        aboutToggle.textContent = collapsed ? 'Read More' : 'Read Less';
-      });
-    }
 
-    const tncToggle = document.getElementById('tnc-toggle');
-    const tncBody = document.getElementById('tnc-body');
-    if (tncToggle && tncBody) {
-      tncToggle.addEventListener('click', function () {
-        const isHidden = tncBody.hasAttribute('hidden');
-        if (isHidden) { tncBody.removeAttribute('hidden'); tncToggle.classList.add('open'); }
-        else { tncBody.setAttribute('hidden', ''); tncToggle.classList.remove('open'); }
-      });
-    }
-  })();
+<script>
+
+(function () {
+
+  /* =========================
+     ABOUT EVENT
+     ========================= */
+
+  const aboutText =
+    document.getElementById('about-text');
+
+  const aboutToggle =
+    document.getElementById('about-toggle');
+
+  if (aboutText && aboutToggle) {
+
+    aboutToggle.addEventListener('click', function () {
+
+      const collapsed =
+        aboutText.classList.toggle('truncated');
+
+      aboutToggle.textContent =
+        collapsed
+          ? 'Read More →'
+          : 'Read Less ↑';
+
+    });
+
+  }
+
+
+  /* =========================
+     TERMS & CONDITIONS
+     ========================= */
+
+  const tncToggle =
+    document.getElementById('tnc-toggle');
+
+  const tncBody =
+    document.getElementById('tnc-body');
+
+  if (tncToggle && tncBody) {
+
+    tncToggle.addEventListener('click', function () {
+
+      const isHidden =
+        tncBody.hasAttribute('hidden');
+
+      if (isHidden) {
+
+        tncBody.removeAttribute('hidden');
+
+        tncToggle.classList.add('open');
+
+      } else {
+
+        tncBody.setAttribute('hidden', '');
+
+        tncToggle.classList.remove('open');
+
+      }
+
+    });
+
+  }
+
+})();
+
 </script>

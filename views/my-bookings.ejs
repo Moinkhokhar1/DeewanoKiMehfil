@@ -1,41 +1,172 @@
-<% pageTitle = 'My Bookings - EventBook' %>
+<% pageTitle = 'My Bookings - Vertex' %>
+
 <%- include('partials/header') %>
 
-<div class="form-page">
-  <h1>My Bookings</h1>
-  <% if (bookings.length === 0) { %>
-    <div class="empty-state">
-      <p>You haven't booked any tickets yet.</p>
-      <a href="/" class="btn-primary">Browse Events</a>
+<main class="vertex-bookings-page">
+
+  <div class="vertex-bookings-container">
+
+    <div class="vertex-bookings-heading">
+      <div>
+        <span class="vertex-eyebrow">YOUR MEHFIL</span>
+        <h1>My Bookings</h1>
+        <p>All your upcoming experiences, in one place.</p>
+      </div>
+
+      <a href="/" class="vertex-browse-btn">
+        <span>Browse Events</span>
+        <span>→</span>
+      </a>
     </div>
-  <% } %>
-  <% bookings.forEach(b => { %>
-    <div class="booking-row">
-      <div class="booking-row-image">
-        <% if (b.imageList && b.imageList.length > 0) { %>
-          <img src="<%= b.imageList[0] %>" alt="<%= b.event_title %>" />
-        <% } else { %>
-          <div class="no-image small">No Image</div>
-        <% } %>
+
+
+    <% if (bookings.length === 0) { %>
+
+      <section class="vertex-bookings-empty">
+
+        <div class="vertex-empty-symbol">✦</div>
+
+        <span class="vertex-eyebrow">NOTHING HERE YET</span>
+
+        <h2>Your Mehfil awaits.</h2>
+
+        <p>
+          You haven't booked any tickets yet.
+          Discover an event and become part of the experience.
+        </p>
+
+        <a href="/" class="status-primary-btn">
+          <span>Explore Events</span>
+          <span class="arrow">→</span>
+        </a>
+
+      </section>
+
+    <% } else { %>
+
+      <div class="vertex-bookings-list">
+
+        <% bookings.forEach(b => { %>
+
+          <article class="vertex-booking-card">
+
+            <div class="vertex-booking-image">
+
+              <% if (b.imageList && b.imageList.length > 0) { %>
+
+                <img
+                  src="<%= b.imageList[0] %>"
+                  alt="<%= b.event_title %>"
+                  loading="lazy"
+                />
+
+              <% } else { %>
+
+                <div class="vertex-booking-no-image">
+                  ✦
+                </div>
+
+              <% } %>
+
+            </div>
+
+
+            <div class="vertex-booking-content">
+
+              <div class="vertex-booking-main">
+
+                <span class="vertex-booking-label">
+                  EVENT
+                </span>
+
+                <h2><%= b.event_title %></h2>
+
+                <div class="vertex-booking-details">
+
+                  <span>
+                    <b>DATE</b>
+                    <%= b.start_date %>
+                  </span>
+
+                  <% if (b.event_time) { %>
+
+                    <span>
+                      <b>TIME</b>
+                      <%= b.event_time %>
+                    </span>
+
+                  <% } %>
+
+                  <% if (b.event_venue) { %>
+
+                    <span>
+                      <b>VENUE</b>
+                      <%= b.event_venue %>
+                    </span>
+
+                  <% } %>
+
+                </div>
+
+              </div>
+
+
+              <div class="vertex-booking-side">
+
+                <div class="vertex-booking-tickets">
+
+                  <span>
+                    <%= b.quantity %> ticket<%= b.quantity > 1 ? 's' : '' %>
+                  </span>
+
+                  <strong>
+                    ₹<%= b.total_amount %>
+                  </strong>
+
+                </div>
+
+
+                <span class="vertex-status status-<%= b.status %>">
+
+                  <% if (b.status === 'pending_payment') { %>
+                    Payment Pending
+
+                  <% } else if (b.status === 'pending_verification') { %>
+                    Verifying Payment
+
+                  <% } else if (b.status === 'confirmed') { %>
+                    Confirmed
+
+                  <% } else if (b.status === 'rejected') { %>
+                    Rejected
+
+                  <% } %>
+
+                </span>
+
+
+                <a
+                  href="/booking/<%= b.id %>/status"
+                  class="vertex-booking-view"
+                >
+                  View Booking
+                  <span>→</span>
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        <% }) %>
+
       </div>
-      <div class="booking-row-body">
-        <h3><%= b.event_title %></h3>
-        <p class="event-meta">📍 <%= b.event_venue %></p>
-        <p class="event-meta">📅 <%= b.start_date %> <% if (b.event_time) { %>&bull; <%= b.event_time %><% } %></p>
-        <p class="event-meta">🎟️ <%= b.quantity %> ticket(s) &bull; ₹<%= b.total_amount %></p>
-        <span class="status-badge status-<%= b.status %>">
-          <% if (b.status === 'pending_payment') { %>Payment Pending
-          <% } else if (b.status === 'pending_verification') { %>Verifying Payment
-          <% } else if (b.status === 'confirmed') { %>Confirmed
-          <% } else if (b.status === 'rejected') { %>Rejected
-          <% } %>
-        </span>
-      </div>
-      <div class="booking-row-action">
-        <a href="/booking/<%= b.id %>/status" class="btn-mini">View</a>
-      </div>
-    </div>
-  <% }) %>
-</div>
+
+    <% } %>
+
+  </div>
+
+</main>
 
 <%- include('partials/footer') %>

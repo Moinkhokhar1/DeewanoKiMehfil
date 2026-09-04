@@ -1,57 +1,285 @@
 <% pageTitle = 'Book Tickets - ' + event.title %>
+
 <%- include('partials/header') %>
 
-<div class="form-page">
-  <a href="/event/<%= event.id %>" class="back-link">&larr; Back to event</a>
-  <h1>Book Tickets</h1>
-  <p class="form-sub"><%= event.title %></p>
+<main class="booking-page">
 
-  <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
+  <div class="booking-container">
 
-  <% if (categories.length === 0) { %>
-    <div class="alert-error">No ticket categories have been set up for this event yet.</div>
-  <% } else { %>
-    <form action="/book/<%= event.id %>" method="POST" class="card-form" id="book-form">
-      <label>Select Ticket Category</label>
-      <div class="category-options">
-        <% categories.forEach((cat, i) => { %>
-          <label class="category-option">
-            <input type="radio" name="category_id" value="<%= cat.id %>" data-price="<%= cat.price %>" <%= i === 0 ? 'checked' : '' %> required />
-            <span class="category-option-name"><%= cat.name %></span>
-            <span class="category-option-price">₹<%= cat.price %></span>
-          </label>
-        <% }) %>
+    <!-- BACK -->
+    <a href="/event/<%= event.id %>" class="booking-back">
+      ← Back to event
+    </a>
+
+
+    <!-- HEADER -->
+    <div class="booking-intro">
+
+      <span class="vertex-eyebrow">RESERVE YOUR PLACE</span>
+
+      <h1>Join the Mehfil.</h1>
+
+      <p>
+        Choose your ticket and make this evening yours.
+      </p>
+
+    </div>
+
+
+    <!-- ERROR -->
+    <% if (error) { %>
+
+      <div class="booking-alert">
+        <%= error %>
       </div>
 
-      <label for="quantity">Number of tickets</label>
-      <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required />
-      <p class="price-hint">₹<span id="unit-price"><%= categories[0].price %></span> per ticket &bull; Total: ₹<span id="total-price"><%= categories[0].price %></span></p>
+    <% } %>
 
-      <button type="submit" class="btn-primary full-width">Continue to Payment</button>
-    </form>
-  <% } %>
-</div>
+
+    <% if (categories.length === 0) { %>
+
+      <div class="booking-alert">
+        No ticket categories have been set up for this event yet.
+      </div>
+
+    <% } else { %>
+
+
+      <form
+        action="/book/<%= event.id %>"
+        method="POST"
+        class="booking-form"
+        id="book-form"
+      >
+
+        <!-- EVENT -->
+        <section class="booking-event">
+
+          <span class="booking-label">EVENT</span>
+
+          <h2><%= event.title %></h2>
+
+          <% if (event.venue) { %>
+            <p class="booking-venue">
+              📍 <%= event.venue %>
+            </p>
+          <% } %>
+
+          <% if (event.start_date) { %>
+            <p class="booking-date">
+              📅 <%= event.start_date %>
+              <% if (event.end_date && event.end_date !== event.start_date) { %>
+                — <%= event.end_date %>
+              <% } %>
+            </p>
+          <% } %>
+
+        </section>
+
+
+        <!-- TICKET SELECTION -->
+        <section class="ticket-section">
+
+          <div class="section-heading">
+
+            <span class="booking-label">01 — SELECT YOUR TICKET</span>
+
+            <h2>Choose your seat.</h2>
+
+          </div>
+
+
+          <div class="ticket-options">
+
+            <% categories.forEach((cat, i) => { %>
+
+              <label class="ticket-option">
+
+                <input
+                  type="radio"
+                  name="category_id"
+                  value="<%= cat.id %>"
+                  data-price="<%= cat.price %>"
+                  <%= i === 0 ? 'checked' : '' %>
+                  required
+                />
+
+                <span class="ticket-option-content">
+
+                  <span class="ticket-option-name">
+                    <%= cat.name %>
+                  </span>
+
+                  <span class="ticket-option-price">
+                    ₹<%= cat.price %>
+                  </span>
+
+                </span>
+
+                <span class="ticket-check">
+                  ✓
+                </span>
+
+              </label>
+
+            <% }) %>
+
+          </div>
+
+        </section>
+
+
+        <!-- QUANTITY -->
+        <section class="quantity-section">
+
+          <div class="section-heading">
+
+            <span class="booking-label">02 — NUMBER OF TICKETS</span>
+
+            <h2>How many are joining?</h2>
+
+          </div>
+
+
+          <div class="quantity-control">
+
+            <label for="quantity">
+              Tickets
+            </label>
+
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              max="10"
+              value="1"
+              required
+            />
+
+          </div>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+        <section class="booking-summary">
+
+          <div>
+
+            <span class="booking-label">YOUR TOTAL</span>
+
+            <p class="summary-category" id="summary-category">
+              <%= categories[0].name %>
+            </p>
+
+          </div>
+
+
+          <div class="summary-price">
+
+            <span class="summary-unit">
+              ₹<span id="unit-price"><%= categories[0].price %></span>
+              / ticket
+            </span>
+
+            <strong>
+              ₹<span id="total-price"><%= categories[0].price %></span>
+            </strong>
+
+          </div>
+
+        </section>
+
+
+        <!-- SUBMIT -->
+        <button
+          type="submit"
+          class="booking-submit"
+        >
+
+          <span>Continue to Payment</span>
+
+          <span class="arrow">→</span>
+
+        </button>
+
+
+      </form>
+
+    <% } %>
+
+  </div>
+
+</main>
+
 
 <script>
+
   (function () {
+
     const form = document.getElementById('book-form');
+
     if (!form) return;
+
     const qtyInput = form.querySelector('#quantity');
+
     const unitEl = document.getElementById('unit-price');
+
     const totalEl = document.getElementById('total-price');
 
+    const categoryEl = document.getElementById('summary-category');
+
+
     function update() {
-      const selected = form.querySelector('input[name="category_id"]:checked');
-      const price = selected ? parseFloat(selected.dataset.price) || 0 : 0;
+
+      const selected = form.querySelector(
+        'input[name="category_id"]:checked'
+      );
+
+      const price = selected
+        ? parseFloat(selected.dataset.price) || 0
+        : 0;
+
       const qty = parseInt(qtyInput.value, 10) || 1;
+
+
       unitEl.textContent = price.toFixed(2);
+
       totalEl.textContent = (price * qty).toFixed(2);
+
+
+      if (selected && categoryEl) {
+
+        const label = selected
+          .closest('.ticket-option')
+          .querySelector('.ticket-option-name');
+
+        if (label) {
+          categoryEl.textContent = label.textContent.trim();
+        }
+
+      }
+
     }
 
-    form.querySelectorAll('input[name="category_id"]').forEach(r => r.addEventListener('change', update));
+
+    form
+      .querySelectorAll('input[name="category_id"]')
+      .forEach(radio => {
+
+        radio.addEventListener('change', update);
+
+      });
+
+
     qtyInput.addEventListener('input', update);
+
+
     update();
+
   })();
+
 </script>
 
 <%- include('partials/footer') %>

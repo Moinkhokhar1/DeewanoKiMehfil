@@ -100,28 +100,20 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 .topbar {
-  padding: 14px 20px;
-
-  /* display: flex; */
-  align-items: center;
-  justify-content: space-between;
-
+  background: var(--brown);
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 50;
-
-  background: linear-gradient(10deg, #301800, #c49a55);
-  border-bottom: 1px solid rgba(199, 148, 50, 0.18);
-  color: #f5eee4;
 }
-/* .topbar-inner {
+.topbar-inner {
   max-width: 1100px;
   margin: 0 auto;
   padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-} */
+}
 .brand { font-size: 1.1rem; font-weight: 700; color: #fff; }
 .nav-links { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
 .nav-links a { color: #fff; opacity: 0.9; }
@@ -348,15 +340,7 @@ img { max-width: 100%; display: block; }
 .qr-image.small { max-width: 140px; }
 .payment-note { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
 
-.ticket-page { 
-     width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  /* max-width: 480px;  */
-  margin: 0 auto; }
+.ticket-page { max-width: 480px; margin: 0 auto; }
 .ticket-card {
   background: #fff; border-radius: 18px; overflow: hidden;
   box-shadow: 0 6px 24px rgba(0,0,0,0.12);
@@ -393,7 +377,7 @@ img { max-width: 100%; display: block; }
 .status-confirmed { background: #e6f4ea; color: var(--success); }
 .status-rejected { background: #fdecea; color: var(--danger); }
 
-/* .admin-body { background: var(--bg); }
+.admin-body { background: var(--bg); }
 .admin-topbar {
   background: var(--dark); color: #fff; padding: 12px 16px;
   display: flex; align-items: center; justify-content: space-between;
@@ -501,590 +485,19 @@ img { max-width: 100%; display: block; }
   .event-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .ticket-bottom { flex-direction: column; align-items: flex-start; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
-} */
-
-/* =========================================================
-   ADMIN PANEL
-   Sufi Mehfil Theme
-   ========================================================= */
-
-.admin-body {
-  min-height: 100vh;
-  background: #080706;
-  color: #d8cec2;
 }
 
 /* =========================================================
-   TOPBAR
+   SUFI LOGIN
    ========================================================= */
-
-.admin-topbar {
-  padding: 14px 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  position: sticky;
-  top: 0;
-  z-index: 50;
-
-  background: linear-gradient(90deg, #0e0c0a, #14110d);
-  border-bottom: 1px solid rgba(199, 148, 50, 0.18);
-  color: #f5eee4;
-}
-
-.admin-topbar .brand {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-
-  color: #c79432;
-  text-decoration: none;
-}
-
-.admin-menu-toggle {
-  display: none;
-
-  background: none;
-  border: none;
-
-  color: #c79432;
-  font-size: 1.3rem;
-
-  cursor: pointer;
-}
-
-/* =========================================================
-   LAYOUT
-   ========================================================= */
-
-.admin-layout {
-  display: flex;
-  min-height: calc(100vh - 58px);
-}
-
-.admin-sidebar {
-  width: 220px;
-  flex-shrink: 0;
-
-  display: flex;
-  flex-direction: column;
-  padding: 18px 0;
-
-  background: #0e0c0a;
-  border-right: 1px solid #29231e;
-}
-
-.admin-sidebar a,
-.admin-sidebar .link-btn {
-  padding: 12px 22px;
-
-  font-size: 0.85rem;
-  letter-spacing: 0.3px;
-  text-align: left;
-  text-decoration: none;
-
-  color: #a89e94;
-
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.admin-sidebar a:hover {
-  background: rgba(199, 148, 50, 0.06);
-  color: #c79432;
-}
-
-.admin-sidebar form { margin: 0; }
-
-.admin-sidebar .link-btn {
-  width: 100%;
-
-  background: none;
-  border: none;
-  font-family: inherit;
-  cursor: pointer;
-
-  color: #b97955;
-  font-weight: 600;
-}
-
-.admin-sidebar .link-btn:hover {
-  background: rgba(185, 121, 85, 0.06);
-  color: #d99a91;
-}
-
-.admin-content {
-  flex: 1;
-  max-width: 1100px;
-  padding: 28px;
-
-  color: #d8cec2;
-}
-
-/* =========================================================
-   TEXT / ACCORDION HELPERS
-   ========================================================= */
-
-.about-text.truncated {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.read-more-link {
-  padding: 4px 0;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  color: #c79432;
-  font-weight: 600;
-}
-
-.read-more-link:hover {
-  color: #d8a745;
-}
-
-.tnc-accordion {
-  margin: 16px 0;
-  border-top: 1px solid #29231e;
-  border-bottom: 1px solid #29231e;
-}
-
-.tnc-header {
-  width: 100%;
-  padding: 14px 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  color: #d8cec2;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.tnc-arrow {
-  color: #c79432;
-  transition: transform 0.2s ease;
-}
-
-.tnc-header.open .tnc-arrow {
-  transform: rotate(90deg);
-}
-
-.tnc-body ul {
-  margin: 0 0 14px;
-  padding-left: 20px;
-
-  color: #918980;
-}
-
-.tnc-body li { margin-bottom: 6px; }
-
-/* =========================================================
-   FORM ROWS
-   ========================================================= */
-
-.category-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.category-row input[type="text"] { flex: 2; }
-.category-row input[type="number"] { flex: 1; }
-
-.btn-remove-row {
-  padding: 0 8px;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  color: #b97955;
-  font-size: 1.2rem;
-}
-
-.btn-remove-row:hover { color: #d99a91; }
-
-.category-options {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.category-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-
-  border: 1px solid #29231e;
-  border-radius: 4px;
-  cursor: pointer;
-
-  background: #0e0c0a;
-  transition: border-color 0.2s ease;
-}
-
-.category-option:hover {
-  border-color: rgba(199, 148, 50, 0.4);
-}
-
-.category-option-name {
-  flex: 1;
-  font-weight: 600;
-  color: #d8cec2;
-}
-
-/* =========================================================
-   STAT CARDS
-   ========================================================= */
-
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px;
-  margin: 16px 0 24px;
-}
-
-.stat-card {
-  padding: 16px;
-
-  background: #0e0c0a;
-  border: 1px solid #29231e;
-  border-radius: 4px;
-}
-
-.stat-card.highlight {
-  border: 1px solid rgba(199, 148, 50, 0.5);
-}
-
-.stat-label {
-  margin: 0;
-  font-size: 0.8rem;
-  color: #8a8178;
-}
-
-.stat-value {
-  margin: 6px 0 0;
-  font-family: Georgia, serif;
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: #f5eee4;
-}
-
-/* =========================================================
-   ACTION ROWS
-   ========================================================= */
-
-.admin-actions-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  margin: 16px 0;
-}
-
-.admin-header-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-/* =========================================================
-   TABLE
-   ========================================================= */
-
-.table-wrap {
-  overflow-x: auto;
-
-  background: #0e0c0a;
-  border: 1px solid #29231e;
-  border-radius: 4px;
-}
-
-.admin-table {
-  width: 100%;
-  min-width: 600px;
-  border-collapse: collapse;
-  font-size: 0.88rem;
-}
-
-.admin-table th,
-.admin-table td {
-  padding: 12px 14px;
-  text-align: left;
-  border-bottom: 1px solid #29231e;
-  color: #d8cec2;
-}
-
-.admin-table th {
-  background: #14110f;
-
-  color: #8a8178;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.admin-table tr:last-child td { border-bottom: none; }
-
-/* =========================================================
-   EVENT GRID (admin)
-   ========================================================= */
-
-.admin-event-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.admin-event-card {
-  overflow: hidden;
-
-  background: #0e0c0a;
-  border: 1px solid #29231e;
-  border-radius: 4px;
-}
-
-.admin-event-image {
-  position: relative;
-  aspect-ratio: 16/10;
-  background: #18130f;
-}
-
-.admin-event-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.draft-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  padding: 3px 8px;
-
-  background: rgba(8, 7, 6, 0.85);
-  border: 1px solid rgba(199, 148, 50, 0.35);
-  border-radius: 3px;
-
-  color: #d5aa61;
-  font-size: 0.7rem;
-}
-
-.admin-event-body { padding: 12px; }
-
-.admin-event-body h3 {
-  margin: 0 0 4px;
-  font-size: 0.95rem;
-  color: #f2ebe1;
-}
-
-.admin-event-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.admin-event-actions form { margin: 0; }
-
-/* =========================================================
-   PANEL SECTIONS
-   ========================================================= */
-
-.admin-panel-section {
-  max-width: 640px;
-  margin-bottom: 16px;
-  padding: 18px;
-
-  background: #0e0c0a;
-  border: 1px solid #29231e;
-  border-radius: 4px;
-}
-
-.admin-panel-section h2 {
-  margin-top: 0;
-  font-family: Georgia, serif;
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: #f5eee4;
-}
-
-.current-qr {
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.current-qr img {
-  max-width: 180px;
-  margin: 0 auto 6px;
-
-  background: #fff;
-  border: 1px solid #29231e;
-  border-radius: 4px;
-}
-
-.existing-images { margin-top: 10px; }
-
-.existing-images-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.existing-image-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-
-  color: #8a8178;
-  font-size: 0.72rem;
-  cursor: pointer;
-}
-
-.existing-image-item img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid #29231e;
-}
-
-/* =========================================================
-   FILTERS
-   ========================================================= */
-
-.filter-tabs {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  margin: 16px 0;
-  padding-bottom: 4px;
-}
-
-.filter-tabs a {
-  padding: 8px 14px;
-  white-space: nowrap;
-
-  background: #0e0c0a;
-  border: 1px solid #29231e;
-  border-radius: 20px;
-
-  color: #8a8178;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.filter-tabs a.active {
-  background: #c79432;
-  border-color: #c79432;
-  color: #120d08;
-}
-
-/* =========================================================
-   VERIFICATION
-   ========================================================= */
-
-.screenshot-preview {
-  max-width: 320px;
-  border-radius: 4px;
-  border: 1px solid #29231e;
-}
-
-.reject-form {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.reject-form input {
-  padding: 10px 12px;
-
-  background: #14110f;
-  border: 1px solid #35302b;
-  border-radius: 4px;
-
-  color: #eee5da;
-  font-size: 0.9rem;
-}
-
-.reject-form input:focus {
-  outline: none;
-  border-color: rgba(199, 148, 50, 0.7);
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 800px) {
-  .admin-menu-toggle { display: block; }
-
-  .admin-sidebar {
-    position: fixed;
-    left: -240px;
-    top: 58px;
-    bottom: 0;
-    z-index: 45;
-
-    transition: left 0.2s ease;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
-  }
-
-  .admin-sidebar.open { left: 0; }
-
-  .admin-content { padding: 16px; }
-}
-
-@media (max-width: 600px) {
-  .form-row-2 { grid-template-columns: 1fr; }
-  .stat-grid { grid-template-columns: repeat(2, 1fr); }
-}
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-.page-wrap:has(.sufi-login-page) {
-    max-width: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    min-height: auto;
-}
 
 .sufi-login-page {
-    width: 100%;
-    min-height: calc(100vh - 68px);
-    margin: 0;
-    padding: 40px 5vw;
-
+    min-height: calc(100vh - 80px);
     position: relative;
     overflow: hidden;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #090807;
     color: #f5eee5;
 }
@@ -1094,7 +507,9 @@ img { max-width: 100%; display: block; }
     position: absolute;
     inset: 0;
 
-    background-image: url('/assets/IMG_6571.PNG');
+    background-image:
+        url('/assets/IMG_6571.PNG');
+
     background-size: cover;
     background-position: center;
     filter: blur(3px);
@@ -1109,9 +524,22 @@ img { max-width: 100%; display: block; }
     inset: 0;
 
     background:
-        radial-gradient(circle at 30% 50%, rgba(105, 54, 24, 0.45), transparent 45%),
-        radial-gradient(circle at 80% 50%, rgba(76, 39, 20, 0.28), transparent 40%),
-        linear-gradient(90deg, rgba(5, 5, 5, 0.72), rgba(5, 5, 5, 0.45), rgba(5, 5, 5, 0.78));
+        radial-gradient(
+            circle at 30% 50%,
+            rgba(105, 54, 24, 0.45),
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at 80% 50%,
+            rgba(76, 39, 20, 0.28),
+            transparent 40%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(5, 5, 5, 0.72),
+            rgba(5, 5, 5, 0.45),
+            rgba(5, 5, 5, 0.78)
+        );
 }
 
 /* Main layout */
@@ -1119,319 +547,16 @@ img { max-width: 100%; display: block; }
     position: relative;
     z-index: 2;
 
-    width: min(1200px, 100%);
+    width: min(1100px, 92%);
     min-height: 600px;
 
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 390px;
+    grid-template-columns: 1fr 420px;
+
     align-items: center;
-    gap: clamp(40px, 6vw, 80px);
+    gap: 80px;
 }
 
-/* =========================================================
-   LEFT SIDE
-   ========================================================= */
-
-.sufi-login-visual {
-    padding: 20px 0;
-    max-width: 620px;
-}
-
-.sufi-eyebrow {
-    font-size: 11px;
-    letter-spacing: 5px;
-    color: #c49a55;
-    margin-bottom: 28px;
-}
-
-.sufi-login-visual h1 {
-    margin: 0;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(48px, 5vw, 76px);
-    line-height: 0.92;
-    letter-spacing: -2px;
-
-    color: #f5eee5;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-}
-
-.sufi-login-visual h1 span {
-    color: #b88732;
-    text-shadow: 0 0 20px rgba(184, 135, 50, 0.3);
-}
-
-.sufi-tagline {
-    margin-top: 28px;
-
-    font-family: Georgia, serif;
-    font-size: 16px;
-    line-height: 1.6;
-
-    color: #d8c8b5;
-}
-
-.sufi-tagline em {
-    color: #b88732;
-}
-
-.sufi-divider {
-    width: 55px;
-    height: 1px;
-    margin: 25px 0;
-
-    background: #b88732;
-    box-shadow: 0 0 12px rgba(184, 135, 50, 0.45);
-}
-
-.sufi-description {
-    color: rgba(245, 238, 229, 0.55);
-    font-size: 13px;
-    line-height: 1.7;
-    letter-spacing: 0.5px;
-}
-
-/* =========================================================
-   LOGIN CARD
-   ========================================================= */
-
-.sufi-login-card {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 38px;
-
-    background: rgba(20, 17, 15, 0.82);
-
-    border: 1px solid rgba(190, 150, 90, 0.2);
-    border-radius: 3px;
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.035);
-}
-
-/* Heading */
-
-.login-small {
-    display: block;
-    margin-bottom: 10px;
-
-    font-size: 9px;
-    letter-spacing: 4px;
-    color: #b88732;
-}
-
-.login-heading h2 {
-    margin: 0;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 34px;
-    line-height: 1.1;
-    font-weight: 400;
-
-    color: #f5eee5;
-}
-
-.login-heading p {
-    margin: 9px 0 30px;
-
-    font-size: 12px;
-    color: rgba(245, 238, 229, 0.5);
-}
-
-/* =========================================================
-   INPUTS
-   ========================================================= */
-
-.input-group {
-    margin-bottom: 18px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: rgba(245, 238, 229, 0.5);
-}
-
-.input-group input {
-    width: 100%;
-    box-sizing: border-box;
-    height: 50px;
-
-    padding: 0 14px;
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 2px;
-
-    background: rgba(255, 255, 255, 0.035);
-    color: #f5eee5;
-
-    font-size: 13px;
-
-    outline: none;
-
-    transition:
-        border-color 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.input-group input::placeholder {
-    color: rgba(245, 238, 229, 0.25);
-}
-
-.input-group input:focus {
-    border-color: rgba(184, 135, 50, 0.65);
-    background: rgba(184, 135, 50, 0.045);
-
-    box-shadow: 0 0 0 3px rgba(184, 135, 50, 0.06);
-}
-
-/* =========================================================
-   BUTTON
-   ========================================================= */
-
-.sufi-login-btn {
-    width: 100%;
-    height: 52px;
-    margin-top: 7px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 18px;
-
-    border: none;
-    border-radius: 2px;
-
-    background: #b88732;
-    color: #120d08;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-
-.sufi-login-btn:hover {
-    background: #d1a24d;
-    transform: translateY(-1px);
-
-    box-shadow: 0 10px 30px rgba(184, 135, 50, 0.2);
-}
-
-.sufi-login-btn .arrow {
-    font-size: 20px;
-    font-weight: 400;
-}
-
-/* =========================================================
-   SIGN UP
-   ========================================================= */
-
-.switch-auth {
-    margin: 22px 0 0;
-    text-align: center;
-    font-size: 11px;
-
-    color: rgba(245, 238, 229, 0.4);
-}
-
-.switch-auth a {
-    color: #c99b50;
-    text-decoration: none;
-    margin-left: 3px;
-}
-
-.switch-auth a:hover {
-    color: #e1b765;
-}
-
-/* =========================================================
-   ERROR
-   ========================================================= */
-
-.sufi-login-card .alert-error {
-    margin-bottom: 20px;
-    padding: 12px 14px;
-
-    border: 1px solid rgba(220, 80, 70, 0.35);
-    background: rgba(120, 30, 25, 0.18);
-
-    color: #e8a29c;
-    font-size: 12px;
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (min-width: 1400px) {
-    .sufi-login-container {
-        width: min(1280px, 100%);
-    }
-}
-
-@media (max-width: 1000px) {
-    .sufi-login-page {
-        padding: 40px 30px;
-    }
-
-    .sufi-login-container {
-        grid-template-columns: 1fr 360px;
-        gap: 40px;
-    }
-}
-
-@media (max-width: 800px) {
-    .sufi-login-page {
-        min-height: auto;
-        padding: 50px 20px;
-    }
-
-    .sufi-login-container {
-        width: 100%;
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .sufi-login-visual {
-        padding: 10px 0;
-        text-align: center;
-    }
-
-    .sufi-login-visual h1 {
-        font-size: 55px;
-    }
-
-    .sufi-eyebrow {
-        letter-spacing: 3px;
-    }
-
-    .sufi-divider {
-        margin: 25px auto;
-    }
-
-    .sufi-description {
-        display: none;
-    }
-
-    .sufi-login-card {
-        padding: 30px 25px;
-    }
-}
 /* =========================================================
    LEFT SIDE
    ========================================================= */
@@ -1736,7 +861,776 @@ img { max-width: 100%; display: block; }
         padding: 30px 25px;
     }
 }
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* =========================================================
+   SUFI LOGIN — REFINED DESKTOP LAYOUT
+   ========================================================= */
+
+.sufi-login-page {
+    min-height: calc(100vh - 80px);
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #090807;
+    color: #f5eee5;
+}
+
+.sufi-login-container {
+    position: relative;
+    z-index: 2;
+
+    width: min(1100px, 90%);
+    min-height: 560px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+
+    align-items: center;
+    gap: 70px;
+}
+
+
+/* LEFT SIDE */
+
+.sufi-login-visual {
+    padding: 20px 0;
+    max-width: 620px;
+}
+
+.sufi-eyebrow {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: #c49a55;
+    margin-bottom: 28px;
+}
+
+.sufi-login-visual h1 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    /* MUCH smaller */
+    font-size: clamp(48px, 5vw, 76px);
+
+    line-height: 0.92;
+    letter-spacing: -2px;
+
+    color: #f5eee5;
+
+    text-shadow:
+        0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+.sufi-login-visual h1 span {
+    color: #b88732;
+
+    text-shadow:
+        0 0 20px rgba(184, 135, 50, 0.3);
+}
+
+.sufi-tagline {
+    margin-top: 28px;
+
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: #d8c8b5;
+}
+
+.sufi-divider {
+    width: 55px;
+    height: 1px;
+
+    margin: 25px 0;
+
+    background: #b88732;
+
+    box-shadow:
+        0 0 12px rgba(184, 135, 50, 0.45);
+}
+
+.sufi-description {
+    font-size: 13px;
+    line-height: 1.7;
+
+    color: rgba(245, 238, 229, 0.55);
+}
+
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
+.sufi-login-card {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 38px;
+
+    background: rgba(20, 17, 15, 0.82);
+
+    border: 1px solid rgba(190, 150, 90, 0.2);
+    border-radius: 3px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.login-small {
+    display: block;
+
+    font-size: 9px;
+    letter-spacing: 4px;
+
+    color: #b88732;
+
+    margin-bottom: 10px;
+}
+
+.login-heading h2 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 34px;
+    line-height: 1.1;
+    font-weight: 400;
+
+    color: #f5eee5;
+}
+
+.login-heading p {
+    margin: 9px 0 30px;
+
+    font-size: 12px;
+
+    color: rgba(245, 238, 229, 0.5);
+}
+
+
+/* INPUTS */
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+
+    color: rgba(245, 238, 229, 0.5);
+}
+
+.input-group input {
+    width: 100%;
+    height: 50px;
+
+    box-sizing: border-box;
+
+    padding: 0 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: #f5eee5;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+.input-group input:focus {
+    border-color: rgba(184, 135, 50, 0.65);
+
+    background: rgba(184, 135, 50, 0.045);
+
+    box-shadow:
+        0 0 0 3px rgba(184, 135, 50, 0.06);
+}
+
+
+/* BUTTON */
+
+.sufi-login-btn {
+    width: 100%;
+    height: 52px;
+
+    margin-top: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 2px;
+
+    background: #b88732;
+    color: #120d08;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.sufi-login-btn:hover {
+    background: #d1a24d;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 30px rgba(184, 135, 50, 0.2);
+}
+
+
+/* SIGN UP */
+
+.switch-auth {
+    margin: 22px 0 0;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: rgba(245, 238, 229, 0.4);
+}
+
+.switch-auth a {
+    color: #c99b50;
+    text-decoration: none;
+    margin-left: 3px;
+}
+
+/* =========================================================
+   SUFI LOGIN — FULL BLEED LAYOUT
+   Prevent global .page-wrap from constraining this page
+   ========================================================= */
+
+.page-wrap:has(.sufi-login-page) {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: auto;
+}
+
+/* Full viewport login section */
+.sufi-login-page {
+    width: 100%;
+    min-height: calc(100vh - 68px);
+    margin: 0;
+    padding: 40px 5vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+
+    background: #090807;
+    color: #f5eee5;
+}
+
+/* Keep the actual content nicely constrained */
+.sufi-login-container {
+    width: min(1200px, 100%);
+    min-height: 600px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+
+    align-items: center;
+    gap: clamp(40px, 6vw, 80px);
+
+    position: relative;
+    z-index: 2;
+}
+
+/* Large desktop */
+@media (min-width: 1400px) {
+    .sufi-login-container {
+        width: min(1280px, 100%);
+    }
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+    .sufi-login-page {
+        padding: 40px 30px;
+    }
+
+    .sufi-login-container {
+        grid-template-columns: 1fr 360px;
+        gap: 40px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+    .sufi-login-page {
+        min-height: auto;
+        padding: 50px 20px;
+    }
+
+    .sufi-login-container {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+
+/* =========================================================
+   VERTEX — SUFI MEHFIL AUTH PAGES
+   Login + Signup
+   ========================================================= */
+
+.auth-page {
+  width: 100%;
+  max-width: 1160px;
+  min-height: calc(100vh - 68px);
+  margin: 0 auto;
+  padding: 28px 0 40px;
+
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  align-items: center;
+  gap: 0;
+
+  background:
+    radial-gradient(
+      circle at 28% 45%,
+      rgba(111, 60, 25, 0.28),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #050505 0%,
+      #0a0807 50%,
+      #120b07 100%
+    );
+
+  color: #f4eee4;
+}
+
+
+/* ---------------------------------------------------------
+   LEFT VISUAL
+   --------------------------------------------------------- */
+
+.auth-visual {
+  min-height: 720px;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 70px 60px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 65%,
+      rgba(143, 76, 30, 0.20),
+      transparent 55%
+    );
+
+  pointer-events: none;
+}
+
+.auth-visual-content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+}
+
+.auth-page .eyebrow {
+  display: block;
+
+  margin-bottom: 28px;
+
+  color: #c79432;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.auth-visual h1 {
+  margin: 0;
+
+  color: #f5eee4;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(52px, 5.4vw, 82px);
+  font-weight: 700;
+  line-height: 0.91;
+  letter-spacing: -3px;
+}
+
+.auth-visual p {
+  margin: 32px 0 0;
+
+  color: #b7aea3;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.auth-visual p em {
+  color: #c79432;
+}
+
+
+/* ---------------------------------------------------------
+   RIGHT FORM AREA
+   --------------------------------------------------------- */
+
+.auth-card-wrapper {
+  display: flex;
+  justify-content: center;
+
+  padding: 40px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+
+  padding: 42px;
+
+  background: rgba(18, 16, 14, 0.94);
+
+  border: 1px solid rgba(199, 148, 50, 0.25);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.auth-heading .eyebrow {
+  margin-bottom: 18px;
+
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.auth-heading h2 {
+  margin: 0;
+
+  color: #f5eee4;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.auth-heading p {
+  margin: 12px 0 30px;
+
+  color: #888078;
+
+  font-size: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   ERROR
+   --------------------------------------------------------- */
+
+.auth-card .alert-error {
+  margin-bottom: 22px;
+  padding: 12px 14px;
+
+  border: 1px solid rgba(220, 70, 70, 0.35);
+
+  background: rgba(120, 25, 25, 0.16);
+
+  color: #e9a4a4;
+
+  font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   FORM
+   --------------------------------------------------------- */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-field label {
+  color: #827a72;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.form-field input {
+  width: 100%;
+  height: 54px;
+
+  padding: 0 15px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #37322e;
+  border-radius: 2px;
+
+  outline: none;
+
+  background: #171411;
+  color: #eee6dc;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-field input::placeholder {
+  color: #514b46;
+}
+
+.form-field input:hover {
+  border-color: #514941;
+}
+
+.form-field input:focus {
+  border-color: #c79432;
+
+  background: #1b1713;
+
+  box-shadow:
+    0 0 0 1px rgba(199, 148, 50, 0.12);
+}
+
+
+/* ---------------------------------------------------------
+   SUBMIT BUTTON
+   --------------------------------------------------------- */
+
+.auth-submit {
+  width: 100%;
+  height: 56px;
+
+  margin-top: 6px;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 0;
+  border-radius: 2px;
+
+  background: #c79432;
+  color: #120d08;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.auth-submit:hover {
+  background: #d7a644;
+  transform: translateY(-1px);
+}
+
+.auth-submit:active {
+  transform: translateY(0);
+}
+
+.auth-submit .arrow {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+
+/* ---------------------------------------------------------
+   LOGIN / SIGNUP SWITCH
+   --------------------------------------------------------- */
+
+.auth-switch {
+  margin: 25px 0 0;
+
+  text-align: center;
+
+  color: #706963;
+
+  font-size: 13px;
+}
+
+.auth-switch a {
+  margin-left: 5px;
+
+  color: #c79432;
+
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  color: #e0b458;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .auth-page {
+    grid-template-columns: 1fr 430px;
+  }
+
+  .auth-visual {
+    padding: 50px 35px;
+  }
+
+  .auth-visual h1 {
+    font-size: clamp(46px, 5vw, 68px);
+  }
+
+  .auth-card-wrapper {
+    padding: 25px;
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .auth-page {
+    max-width: none;
+    min-height: auto;
+
+    grid-template-columns: 1fr;
+
+    padding: 0;
+  }
+
+  .auth-visual {
+    min-height: 420px;
+
+    padding: 60px 30px;
+
+    align-items: flex-end;
+  }
+
+  .auth-visual h1 {
+    font-size: clamp(48px, 10vw, 72px);
+  }
+
+  .auth-card-wrapper {
+    padding: 30px 20px 50px;
+  }
+
+  .auth-card {
+    max-width: 520px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .auth-visual {
+    min-height: 350px;
+    padding: 45px 22px;
+  }
+
+  .auth-page .eyebrow {
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+  }
+
+  .auth-visual h1 {
+    font-size: 46px;
+    line-height: 0.94;
+    letter-spacing: -2px;
+  }
+
+  .auth-visual p {
+    margin-top: 22px;
+    font-size: 15px;
+  }
+
+  .auth-card-wrapper {
+    padding: 20px 14px 40px;
+  }
+
+  .auth-card {
+    padding: 28px 22px;
+  }
+
+  .auth-heading h2 {
+    font-size: 32px;
+  }
+
+  .form-field input {
+    height: 52px;
+  }
+
+  .auth-submit {
+    height: 54px;
+  }
+
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------ */
 /* =========================================================
    VERTEX — HOME / EVENTS
    Sufi Mehfil Theme
@@ -1887,7 +1781,7 @@ img { max-width: 100%; display: block; }
 
   height: 54px;
 
-  padding:21px 17px;
+  padding: 0 17px;
 
   border: 0;
   outline: 0;
@@ -2342,7 +2236,57 @@ img { max-width: 100%; display: block; }
 
 }
 
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------------------ */
+
+.vertex-home {
+  width: 100%;
+  max-width: none;
+  min-height: calc(100vh - 72px);
+
+  margin: 0;
+  padding: 0;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(112, 57, 21, 0.20),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(92, 48, 18, 0.12),
+      transparent 35%
+    ),
+    #080706;
+
+  color: #f5eee4;
+}
+.vertex-hero {
+  width: 100%;
+  max-width: none;
+  min-height: 520px;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+
+  border-bottom: 1px solid rgba(199, 148, 50, 0.12);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 7, 6, 0.98) 0%,
+      rgba(8, 7, 6, 0.88) 45%,
+      rgba(8, 7, 6, 0.62) 100%
+    );
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
 /* =========================================================
    VERTEX — EVENT DETAIL
    Sufi Mehfil Theme
@@ -3152,612 +3096,7 @@ img { max-width: 100%; display: block; }
   }
 
 }
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/* =========================================================
-   VERTEX — BOOKING PAGE
-   Sufi Mehfil Theme
-   ========================================================= */
-
-.booking-page {
-  width: 100%;
-  min-height: calc(100vh - 68px);
-
-  box-sizing: border-box;
-
-  padding: 55px 24px 120px;
-
-  background:
-    radial-gradient(
-      circle at 15% 15%,
-      rgba(112, 57, 21, 0.16),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 85% 60%,
-      rgba(199, 148, 50, 0.06),
-      transparent 35%
-    ),
-    #080706;
-
-  color: #f5eee4;
-}
-
-
-.booking-container {
-  width: min(900px, 100%);
-
-  margin: 0 auto;
-}
-
-
-/* =========================================================
-   BACK
-   ========================================================= */
-
-.booking-back {
-  display: inline-block;
-
-  margin-bottom: 38px;
-
-  color: #746c64;
-
-  font-size: 12px;
-
-  text-decoration: none;
-
-  transition: color 0.2s ease;
-}
-
-
-.booking-back:hover {
-  color: #c79432;
-}
-
-
-/* =========================================================
-   INTRO
-   ========================================================= */
-
-.booking-intro {
-  margin-bottom: 40px;
-}
-
-
-.booking-intro .vertex-eyebrow {
-  margin-bottom: 18px;
-}
-
-
-.booking-intro h1 {
-  margin: 0;
-
-  color: #f5eee4;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: clamp(54px, 7vw, 82px);
-
-  line-height: 0.95;
-
-  font-weight: 500;
-
-  letter-spacing: -3px;
-}
-
-
-.booking-intro p {
-  margin: 20px 0 0;
-
-  color: #827a72;
-
-  font-family: Georgia, serif;
-
-  font-size: 15px;
-
-  line-height: 1.6;
-}
-
-
-/* =========================================================
-   ALERT
-   ========================================================= */
-
-.booking-alert {
-  margin-bottom: 24px;
-
-  padding: 15px 18px;
-
-  border: 1px solid rgba(180, 65, 65, 0.45);
-
-  background: rgba(100, 25, 20, 0.12);
-
-  color: #d99a91;
-
-  font-size: 12px;
-
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   EVENT INFORMATION
-   ========================================================= */
-
-.booking-event {
-  margin-bottom: 24px;
-
-  padding: 30px;
-
-  border: 1px solid #29231e;
-
-  background: #0e0c0a;
-}
-
-
-.booking-label {
-  display: block;
-
-  margin-bottom: 12px;
-
-  color: #c79432;
-
-  font-size: 9px;
-
-  font-weight: 600;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-}
-
-
-.booking-event h2 {
-  margin: 0;
-
-  color: #f3ebe0;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 31px;
-
-  font-weight: 500;
-
-  line-height: 1.15;
-}
-
-
-.booking-venue,
-.booking-date {
-  margin: 12px 0 0;
-
-  color: #716961;
-
-  font-size: 12px;
-}
-
-
-.booking-date {
-  margin-top: 7px;
-}
-
-
-/* =========================================================
-   SECTIONS
-   ========================================================= */
-
-.ticket-section,
-.quantity-section {
-  margin-top: 24px;
-
-  padding: 32px;
-
-  border: 1px solid #29231e;
-
-  background: #0e0c0a;
-}
-
-
-.section-heading {
-  margin-bottom: 25px;
-}
-
-
-.section-heading .booking-label {
-  margin-bottom: 12px;
-}
-
-
-.section-heading h2 {
-  margin: 0;
-
-  color: #f3ebe0;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 31px;
-
-  font-weight: 500;
-
-  letter-spacing: -1px;
-}
-
-
-/* =========================================================
-   TICKET OPTIONS
-   ========================================================= */
-
-.ticket-options {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 10px;
-}
-
-
-.ticket-option {
-  position: relative;
-
-  display: block;
-
-  cursor: pointer;
-}
-
-
-.ticket-option input {
-  position: absolute;
-
-  opacity: 0;
-
-  pointer-events: none;
-}
-
-
-.ticket-option-content {
-  min-height: 65px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  box-sizing: border-box;
-
-  padding: 0 22px;
-
-  border: 1px solid #302a24;
-
-  background: #14110f;
-
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease;
-}
-
-
-.ticket-option-name {
-  color: #d8cec2;
-
-  font-family: Georgia, serif;
-
-  font-size: 16px;
-}
-
-
-.ticket-option-price {
-  color: #c79432;
-margin-right: 28px;
-  font-family: Georgia, serif;
-
-  font-size: 17px;
-}
-
-
-.ticket-option:hover .ticket-option-content {
-  border-color: rgba(199, 148, 50, 0.45);
-}
-
-
-.ticket-option input:checked
-+ .ticket-option-content {
-  border-color: #c79432;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(199, 148, 50, 0.10),
-      rgba(199, 148, 50, 0.025)
-    );
-}
-
-
-.ticket-check {
-  position: absolute;
-
-  right: 22px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  width: 19px;
-  height: 19px;
-
-  display: none;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #c79432;
-
-  color: #120d08;
-
-  font-size: 11px;
-
-  font-weight: 700;
-}
-
-
-.ticket-option input:checked
-~ .ticket-check {
-  display: flex;
-}
-
-
-/* =========================================================
-   QUANTITY
-   ========================================================= */
-
-.quantity-control {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  min-height: 58px;
-
-  border-top: 1px solid #29231e;
-
-  border-bottom: 1px solid #29231e;
-}
-
-
-.quantity-control label {
-  color: #8a8178;
-
-  font-size: 12px;
-}
-
-
-.quantity-control input {
-  width: 90px;
-
-  height: 42px;
-
-  box-sizing: border-box;
-
-  border: 1px solid #38312b;
-
-  outline: none;
-
-  background: #15120f;
-
-  color: #f3ebe0;
-
-  text-align: center;
-
-  font-family: Georgia, serif;
-
-  font-size: 17px;
-}
-
-
-.quantity-control input:focus {
-  border-color: #c79432;
-}
-
-
-/* =========================================================
-   SUMMARY
-   ========================================================= */
-
-.booking-summary {
-  display: flex;
-
-  align-items: flex-end;
-
-  justify-content: space-between;
-
-  margin-top: 24px;
-
-  padding: 28px 30px;
-
-  border: 1px solid rgba(199, 148, 50, 0.35);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(199, 148, 50, 0.08),
-      rgba(15, 12, 9, 0.95)
-    );
-}
-
-
-.summary-category {
-  margin: 0;
-
-  color: #d7cec3;
-
-  font-family: Georgia, serif;
-
-  font-size: 17px;
-}
-
-
-.summary-price {
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: flex-end;
-}
-
-
-.summary-unit {
-  margin-bottom: 5px;
-
-  color: #6f665e;
-
-  font-size: 10px;
-}
-
-
-.summary-price strong {
-  color: #c79432;
-
-  font-family: Georgia, serif;
-
-  font-size: 32px;
-
-  font-weight: 500;
-}
-
-
-/* =========================================================
-   SUBMIT
-   ========================================================= */
-
-.booking-submit {
-  width: 100%;
-
-  height: 58px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  margin-top: 14px;
-
-  padding: 0 22px;
-
-  border: 0;
-
-  background: #c79432;
-
-  color: #120d08;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-}
-
-
-.booking-submit:hover {
-  background: #d8a745;
-
-  transform: translateY(-1px);
-}
-
-
-.booking-submit .arrow {
-  font-size: 20px;
-
-  font-weight: 400;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 650px) {
-
-  .booking-page {
-    padding: 40px 16px 90px;
-  }
-
-
-  .booking-intro h1 {
-    font-size: 54px;
-
-    letter-spacing: -2px;
-  }
-
-
-  .booking-event,
-  .ticket-section,
-  .quantity-section {
-    padding: 23px;
-  }
-
-
-  .section-heading h2 {
-    font-size: 27px;
-  }
-
-
-  .booking-summary {
-    padding: 23px;
-
-    align-items: flex-start;
-
-    flex-direction: column;
-
-    gap: 20px;
-  }
-
-
-  .summary-price {
-    align-items: flex-start;
-  }
-
-
-  .summary-price strong {
-    font-size: 29px;
-  }
-
-}
-
-
-@media (max-width: 420px) {
-
-  .ticket-option-content {
-    min-height: 60px;
-
-    padding: 0 16px;
-  }
-
-
-  .ticket-option-name {
-    font-size: 14px;
-  }
-
-
-  .ticket-option-price {
-    font-size: 15px;
-
-    padding-right: 25px;
-  }
-
-
-  .booking-intro h1 {
-    font-size: 48px;
-  }
-
-}
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
 /* =========================================================
    VERTEX — PAYMENT PAGE
    Sufi Mehfil Theme
@@ -4392,7 +3731,612 @@ margin-right: 28px;
   }
 
 }
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
+/* =========================================================
+   VERTEX — BOOKING PAGE
+   Sufi Mehfil Theme
+   ========================================================= */
+
+.booking-page {
+  width: 100%;
+  min-height: calc(100vh - 68px);
+
+  box-sizing: border-box;
+
+  padding: 55px 24px 120px;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(112, 57, 21, 0.16),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 60%,
+      rgba(199, 148, 50, 0.06),
+      transparent 35%
+    ),
+    #080706;
+
+  color: #f5eee4;
+}
+
+
+.booking-container {
+  width: min(900px, 100%);
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   BACK
+   ========================================================= */
+
+.booking-back {
+  display: inline-block;
+
+  margin-bottom: 38px;
+
+  color: #746c64;
+
+  font-size: 12px;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+
+.booking-back:hover {
+  color: #c79432;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.booking-intro {
+  margin-bottom: 40px;
+}
+
+
+.booking-intro .vertex-eyebrow {
+  margin-bottom: 18px;
+}
+
+
+.booking-intro h1 {
+  margin: 0;
+
+  color: #f5eee4;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(54px, 7vw, 82px);
+
+  line-height: 0.95;
+
+  font-weight: 500;
+
+  letter-spacing: -3px;
+}
+
+
+.booking-intro p {
+  margin: 20px 0 0;
+
+  color: #827a72;
+
+  font-family: Georgia, serif;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   ALERT
+   ========================================================= */
+
+.booking-alert {
+  margin-bottom: 24px;
+
+  padding: 15px 18px;
+
+  border: 1px solid rgba(180, 65, 65, 0.45);
+
+  background: rgba(100, 25, 20, 0.12);
+
+  color: #d99a91;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   EVENT INFORMATION
+   ========================================================= */
+
+.booking-event {
+  margin-bottom: 24px;
+
+  padding: 30px;
+
+  border: 1px solid #29231e;
+
+  background: #0e0c0a;
+}
+
+
+.booking-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #c79432;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+
+.booking-event h2 {
+  margin: 0;
+
+  color: #f3ebe0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 31px;
+
+  font-weight: 500;
+
+  line-height: 1.15;
+}
+
+
+.booking-venue,
+.booking-date {
+  margin: 12px 0 0;
+
+  color: #716961;
+
+  font-size: 12px;
+}
+
+
+.booking-date {
+  margin-top: 7px;
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.ticket-section,
+.quantity-section {
+  margin-top: 24px;
+
+  padding: 32px;
+
+  border: 1px solid #29231e;
+
+  background: #0e0c0a;
+}
+
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+
+.section-heading .booking-label {
+  margin-bottom: 12px;
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #f3ebe0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 31px;
+
+  font-weight: 500;
+
+  letter-spacing: -1px;
+}
+
+
+/* =========================================================
+   TICKET OPTIONS
+   ========================================================= */
+
+.ticket-options {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+.ticket-option {
+  position: relative;
+
+  display: block;
+
+  cursor: pointer;
+}
+
+
+.ticket-option input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+.ticket-option-content {
+  min-height: 65px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  padding: 0 22px;
+
+  border: 1px solid #302a24;
+
+  background: #14110f;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.ticket-option-name {
+  color: #d8cec2;
+
+  font-family: Georgia, serif;
+
+  font-size: 16px;
+}
+
+
+.ticket-option-price {
+  color: #c79432;
+margin-right: 28px;
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+}
+
+
+.ticket-option:hover .ticket-option-content {
+  border-color: rgba(199, 148, 50, 0.45);
+}
+
+
+.ticket-option input:checked
++ .ticket-option-content {
+  border-color: #c79432;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(199, 148, 50, 0.10),
+      rgba(199, 148, 50, 0.025)
+    );
+}
+
+
+.ticket-check {
+  position: absolute;
+
+  right: 22px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 19px;
+  height: 19px;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #c79432;
+
+  color: #120d08;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+.ticket-option input:checked
+~ .ticket-check {
+  display: flex;
+}
+
+
+/* =========================================================
+   QUANTITY
+   ========================================================= */
+
+.quantity-control {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  min-height: 58px;
+
+  border-top: 1px solid #29231e;
+
+  border-bottom: 1px solid #29231e;
+}
+
+
+.quantity-control label {
+  color: #8a8178;
+
+  font-size: 12px;
+}
+
+
+.quantity-control input {
+  width: 90px;
+
+  height: 42px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #38312b;
+
+  outline: none;
+
+  background: #15120f;
+
+  color: #f3ebe0;
+
+  text-align: center;
+
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+}
+
+
+.quantity-control input:focus {
+  border-color: #c79432;
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.booking-summary {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  margin-top: 24px;
+
+  padding: 28px 30px;
+
+  border: 1px solid rgba(199, 148, 50, 0.35);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(199, 148, 50, 0.08),
+      rgba(15, 12, 9, 0.95)
+    );
+}
+
+
+.summary-category {
+  margin: 0;
+
+  color: #d7cec3;
+
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+}
+
+
+.summary-price {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+}
+
+
+.summary-unit {
+  margin-bottom: 5px;
+
+  color: #6f665e;
+
+  font-size: 10px;
+}
+
+
+.summary-price strong {
+  color: #c79432;
+
+  font-family: Georgia, serif;
+
+  font-size: 32px;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.booking-submit {
+  width: 100%;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 14px;
+
+  padding: 0 22px;
+
+  border: 0;
+
+  background: #c79432;
+
+  color: #120d08;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.booking-submit:hover {
+  background: #d8a745;
+
+  transform: translateY(-1px);
+}
+
+
+.booking-submit .arrow {
+  font-size: 20px;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .booking-page {
+    padding: 40px 16px 90px;
+  }
+
+
+  .booking-intro h1 {
+    font-size: 54px;
+
+    letter-spacing: -2px;
+  }
+
+
+  .booking-event,
+  .ticket-section,
+  .quantity-section {
+    padding: 23px;
+  }
+
+
+  .section-heading h2 {
+    font-size: 27px;
+  }
+
+
+  .booking-summary {
+    padding: 23px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+
+  .summary-price {
+    align-items: flex-start;
+  }
+
+
+  .summary-price strong {
+    font-size: 29px;
+  }
+
+}
+
+
+@media (max-width: 420px) {
+
+  .ticket-option-content {
+    min-height: 60px;
+
+    padding: 0 16px;
+  }
+
+
+  .ticket-option-name {
+    font-size: 14px;
+  }
+
+
+  .ticket-option-price {
+    font-size: 15px;
+
+    padding-right: 25px;
+  }
+
+
+  .booking-intro h1 {
+    font-size: 48px;
+  }
+
+}
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
 /* =========================================================
    VERTEX — BOOKING STATUS
    Sufi Mehfil Theme
@@ -4857,7 +4801,7 @@ margin-right: 28px;
   }
 
 }
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
 /* =========================================================
    VERTEX — MY BOOKINGS
    Sufi Mehfil Theme
@@ -5520,30 +5464,220 @@ margin-right: 28px;
   }
 
 }
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-/* =========================================================
-   TICKET PAGE
-   Consolidated — replaces two duplicate stacked definitions
-   ========================================================= */
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
 
-/* Prevent global .page-wrap (max-width: 1100px) from squeezing
-   this page into a narrow centered column on desktop */
-.page-wrap:has(.ticket-page) {
-  max-width: none;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+/* ---------------------------------------------------------------------------------------------------------------- */
+.ticket-page {
+    width: 100%;
+    min-height: calc(100vh - 65px);
+    background: #090807;
+    color: #eee7dc;
+    padding: 70px 0 100px;
 }
 
-.ticket-page {
-     width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  min-height: calc(100vh - 65px);
+.ticket-content {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
+/* Heading */
+
+.ticket-heading {
+    padding-bottom: 35px;
+    border-bottom: 1px solid rgba(201, 149, 37, .15);
+}
+
+.ticket-heading > span,
+.welcome > span,
+.welcome-bottom > span {
+    color: #c99525;
+    font-size: 10px;
+    letter-spacing: 5px;
+    font-weight: 600;
+}
+
+.ticket-heading h1 {
+    margin: 12px 0;
+    font-family: Georgia, serif;
+    font-size: 72px;
+    font-weight: 400;
+    color: #f1ebe1;
+}
+
+.ticket-heading p {
+    margin: 0;
+    color: #817b72;
+    font-family: Georgia, serif;
+    font-size: 16px;
+}
+
+
+/* Ticket */
+
+.ticket-card {
+    margin-top: 40px;
+    padding: 35px;
+    background: #11100f;
+    border: 1px solid rgba(201, 149, 37, .15);
+}
+
+/* THIS IS THE IMPORTANT PART */
+
+.ticket-preview {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #050505;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.ticket-preview img {
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    display: block;
+}
+
+
+/* Welcome */
+
+.welcome {
+    max-width: 800px;
+    margin: 55px auto 0;
+    text-align: center;
+}
+
+.welcome h1 {
+    margin: 18px 0;
+    font-family: Georgia, serif;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.welcome p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: #817b72;
+    line-height: 1.8;
+}
+
+
+/* Fine print */
+
+.fine-print {
+    margin: 30px 0;
+    text-align: center;
+    color: #625e58;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+
+/* Buttons */
+
+.ticket-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ticket-actions a,
+.ticket-actions button {
+    min-height: 48px;
+    padding: 0 25px;
+    border-radius: 0;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #c99525;
+    color: #090807;
+    border: 1px solid #c99525;
+    text-decoration: none;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #b4ada3;
+    border: 1px solid rgba(210, 192, 165, .2);
+    text-decoration: none;
+}
+
+
+/* Bottom welcome */
+
+.welcome-bottom {
+    margin-top: 120px;
+    padding: 100px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(201, 149, 37, .12);
+    border-bottom: 1px solid rgba(201, 149, 37, .12);
+}
+
+.welcome-bottom h1 {
+    margin: 25px 0;
+    font-family: Georgia, serif;
+    font-size: 90px;
+    font-weight: 400;
+    line-height: .95;
+}
+
+.welcome-bottom p {
+    color: #777168;
+    font-family: Georgia, serif;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .ticket-page {
+        padding: 45px 0 70px;
+    }
+
+    .ticket-content {
+        width: calc(100% - 30px);
+    }
+
+    .ticket-heading h1 {
+        font-size: 48px;
+    }
+
+    .ticket-card {
+        padding: 15px;
+    }
+
+    .ticket-preview {
+        padding: 8px;
+    }
+
+    .welcome h1 {
+        font-size: 36px;
+    }
+
+    .welcome-bottom h1 {
+        font-size: 58px;
+    }
+
+    .ticket-actions {
+        flex-direction: column;
+    }
+
+    .ticket-actions a,
+    .ticket-actions button {
+        width: 100%;
+    }
+}.ticket-page {
+  min-height: calc(100vh - 65px);
   background:
     radial-gradient(
       circle at 50% 0%,
@@ -5561,37 +5695,31 @@ margin-right: 28px;
 .ticket-header {
   max-width: 1100px;
   margin: 0 auto 55px;
-
   border-bottom: 1px solid rgba(194, 145, 45, 0.18);
   padding-bottom: 35px;
 }
 
 .eyebrow {
   display: block;
-  margin-bottom: 15px;
-
   color: #c99725;
-
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 5px;
   text-transform: uppercase;
+  margin-bottom: 15px;
 }
 
 .ticket-header h1 {
   margin: 0;
-
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(52px, 7vw, 92px);
   font-weight: 400;
   line-height: 0.95;
-
   color: #f3eadc;
 }
 
 .ticket-header p {
   margin: 22px 0 0;
-
   color: #81796e;
   font-size: 15px;
 }
@@ -5602,8 +5730,6 @@ margin-right: 28px;
   width: min(1100px, 100%);
   margin: auto;
 
-  position: relative;
-
   background:
     linear-gradient(
       145deg,
@@ -5612,7 +5738,10 @@ margin-right: 28px;
     );
 
   border: 1px solid rgba(194, 145, 45, 0.18);
+
   padding: clamp(35px, 5vw, 70px);
+
+  position: relative;
 }
 
 /* GOLD CORNERS */
@@ -5621,17 +5750,14 @@ margin-right: 28px;
 .ticket-card::after {
   content: "";
   position: absolute;
-
   width: 55px;
   height: 55px;
-
   pointer-events: none;
 }
 
 .ticket-card::before {
   top: 12px;
   left: 12px;
-
   border-top: 1px solid rgba(201, 151, 37, 0.5);
   border-left: 1px solid rgba(201, 151, 37, 0.5);
 }
@@ -5639,7 +5765,6 @@ margin-right: 28px;
 .ticket-card::after {
   right: 12px;
   bottom: 12px;
-
   border-right: 1px solid rgba(201, 151, 37, 0.5);
   border-bottom: 1px solid rgba(201, 151, 37, 0.5);
 }
@@ -5648,20 +5773,19 @@ margin-right: 28px;
 
 .ticket-preview {
   width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
   background: #050505;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+
   padding: 30px;
-  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .ticket-preview img {
   display: block;
-
   width: min(900px, 100%);
   height: auto;
 
@@ -5673,7 +5797,6 @@ margin-right: 28px;
 .welcome-section {
   max-width: 720px;
   margin: 75px auto 0;
-
   text-align: center;
 }
 
@@ -5697,18 +5820,6 @@ margin-right: 28px;
   line-height: 1.9;
 }
 
-/* FINE PRINT */
-
-.fine-print {
-  margin: 30px 0;
-
-  text-align: center;
-
-  color: #625e58;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
 .welcome-section .fine-print {
   margin-top: 35px;
 
@@ -5722,12 +5833,12 @@ margin-right: 28px;
 
 .ticket-actions {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
 
   margin-top: 45px;
+  flex-wrap: wrap;
 }
 
 .ticket-actions a,
@@ -5754,29 +5865,29 @@ margin-right: 28px;
     transform 0.25s ease;
 }
 
-.ticket-actions .btn-primary {
+.btn-primary {
   background: #d39a1b;
   color: #080705;
   border: 1px solid #d39a1b;
 }
 
-.ticket-actions .btn-primary span {
+.btn-primary span {
   font-size: 20px;
   line-height: 0;
 }
 
-.ticket-actions .btn-primary:hover {
+.btn-primary:hover {
   background: #e3ae35;
   transform: translateY(-2px);
 }
 
-.ticket-actions .btn-outline {
+.btn-outline {
   background: transparent;
   color: #c7beb1;
   border: 1px solid rgba(194, 145, 45, 0.25);
 }
 
-.ticket-actions .btn-outline:hover {
+.btn-outline:hover {
   color: #e5d5b6;
   border-color: rgba(194, 145, 45, 0.6);
 }
@@ -5786,12 +5897,6 @@ margin-right: 28px;
 @media (max-width: 700px) {
 
   .ticket-page {
-     width: 100vw;
-  /* position: relative; */
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;  
     padding: 50px 20px 80px;
   }
 
@@ -5865,12 +5970,3 @@ margin-right: 28px;
     max-width: 100%;
   }
 }
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */

@@ -1,29 +1,117 @@
-<% pageTitle = 'Booking Status - EventBook' %>
+<% pageTitle = 'Booking Status - Vertex' %>
+
 <%- include('partials/header') %>
 
-<div class="form-page center-page">
-  <% if (booking.status === 'pending_payment') { %>
-    <div class="status-icon">⏳</div>
-    <h1>Payment Pending</h1>
-    <p class="form-sub">Please complete your payment to proceed.</p>
-    <a href="/checkout/<%= booking.id %>" class="btn-primary">Go to Payment</a>
-  <% } else if (booking.status === 'pending_verification') { %>
-    <div class="status-icon">🕵️</div>
-    <h1>Verification in Progress</h1>
-    <p class="form-sub">We've received your payment proof for <strong><%= event.title %></strong>. Your ticket will be generated once the organizer verifies it. This page will update once confirmed — check back soon.</p>
-    <p class="fine-print">Booking Ref: <%= booking.booking_ref %></p>
-    <a href="/my-bookings" class="btn-outline">View My Bookings</a>
-  <% } else if (booking.status === 'confirmed') { %>
-    <div class="status-icon">✅</div>
-    <h1>Booking Confirmed!</h1>
-    <p class="form-sub">Your ticket for <strong><%= event.title %></strong> is ready.</p>
-    <a href="/ticket/<%= booking.id %>" class="btn-primary">View Ticket</a>
-  <% } else if (booking.status === 'rejected') { %>
-    <div class="status-icon">❌</div>
-    <h1>Payment Could Not Be Verified</h1>
-    <p class="form-sub"><%= booking.rejection_reason || 'Please contact the organizer for assistance.' %></p>
-    <a href="/checkout/<%= booking.id %>" class="btn-outline">Contact Organizer</a>
-  <% } %>
-</div>
+<main class="status-page">
+
+  <div class="status-glow"></div>
+
+  <section class="status-card">
+
+    <% if (booking.status === 'pending_payment') { %>
+
+      <div class="status-symbol pending">◷</div>
+
+      <span class="status-eyebrow">PAYMENT REQUIRED</span>
+
+      <h1>Complete Your<br><em>Mehfil</em> Booking.</h1>
+
+      <p class="status-description">
+        Your booking is reserved, but payment is still pending.
+        Complete the payment to secure your place at the event.
+      </p>
+
+      <div class="status-reference">
+        <span>BOOKING REF</span>
+        <strong><%= booking.booking_ref %></strong>
+      </div>
+
+      <a href="/checkout/<%= booking.id %>" class="status-primary-btn">
+        <span>Complete Payment</span>
+        <span class="arrow">→</span>
+      </a>
+
+    <% } else if (booking.status === 'pending_verification') { %>
+
+      <div class="status-symbol verifying">✦</div>
+
+      <span class="status-eyebrow">PAYMENT RECEIVED</span>
+
+      <h1>Verification<br><em>in Progress.</em></h1>
+
+      <p class="status-description">
+        We've received your payment proof for
+        <strong><%= event.title %></strong>.
+        Your ticket will be generated once the organizer verifies your payment.
+      </p>
+
+      <div class="status-reference">
+        <span>BOOKING REF</span>
+        <strong><%= booking.booking_ref %></strong>
+      </div>
+
+      <div class="status-note">
+        <span>✦</span>
+        Your booking is being reviewed by the organizer.
+      </div>
+
+      <a href="/my-bookings" class="status-secondary-btn">
+        View My Bookings
+        <span>→</span>
+      </a>
+
+    <% } else if (booking.status === 'confirmed') { %>
+
+      <div class="status-symbol confirmed">✓</div>
+
+      <span class="status-eyebrow">YOU'RE IN</span>
+
+      <h1>Booking<br><em>Confirmed.</em></h1>
+
+      <p class="status-description">
+        Your ticket for
+        <strong><%= event.title %></strong>
+        is ready.
+        We look forward to welcoming you to the Mehfil.
+      </p>
+
+      <div class="status-reference">
+        <span>BOOKING REF</span>
+        <strong><%= booking.booking_ref %></strong>
+      </div>
+
+      <a href="/ticket/<%= booking.id %>" class="status-primary-btn">
+        <span>View My Ticket</span>
+        <span class="arrow">→</span>
+      </a>
+
+    <% } else if (booking.status === 'rejected') { %>
+
+      <div class="status-symbol rejected">×</div>
+
+      <span class="status-eyebrow">PAYMENT ISSUE</span>
+
+      <h1>Payment Could<br><em>Not Be Verified.</em></h1>
+
+      <p class="status-description">
+        <%= booking.rejection_reason ||
+          'Please contact the organizer for assistance with your payment.' %>
+      </p>
+
+      <div class="status-reference">
+        <span>BOOKING REF</span>
+        <strong><%= booking.booking_ref %></strong>
+      </div>
+
+      <a href="/checkout/<%= booking.id %>" class="status-secondary-btn">
+        Review Payment
+        <span>→</span>
+      </a>
+
+    <% } %>
+
+  </section>
+
+</main>
 
 <%- include('partials/footer') %>

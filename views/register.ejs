@@ -1,24 +1,189 @@
-<% pageTitle = 'Sign Up - EventBook' %>
+<% pageTitle = 'Sign Up - Vertex' %>
+
 <%- include('partials/header') %>
 
-<div class="form-page auth-page">
-  <h1>Create Account</h1>
-  <p class="form-sub">Sign up to start booking event tickets.</p>
-  <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
-  <form action="/register" method="POST" class="card-form">
-    <label for="name">Full Name</label>
-    <input type="text" id="name" name="name" value="<%= old.name || '' %>" required autofocus />
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" value="<%= old.email || '' %>" required />
-    <label for="phone">Phone</label>
-    <input type="tel" id="phone" name="phone" value="<%= old.phone || '' %>" />
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required minlength="6" />
-    <label for="confirm_password">Confirm Password</label>
-    <input type="password" id="confirm_password" name="confirm_password" required minlength="6" />
-    <button type="submit" class="btn-primary full-width">Sign Up</button>
-  </form>
-  <p class="switch-auth">Already have an account? <a href="/login">Login</a></p>
+<div class="sufi-login-page">
+
+  <!-- Background artwork -->
+  <div class="sufi-login-bg"></div>
+  <div class="sufi-login-overlay"></div>
+
+  <div class="sufi-login-container">
+
+    <!-- Left: Event branding -->
+    <div class="sufi-login-visual">
+
+      <div class="sufi-eyebrow">
+        VERTEX PRESENTS
+      </div>
+
+      <h1>
+        An evening of Sufi melodies,<br>
+        soulful voices & timeless poetry.
+      </h1>
+
+      <p class="sufi-login-visual-sub">
+        Aise aane se toh behtar tha...<br>
+        <em>na aana dil ka.</em>
+      </p>
+
+    </div>
+
+
+    <!-- Right: Register -->
+    <div class="sufi-login-card">
+
+      <div class="login-heading">
+
+        <span class="login-small">
+          JOIN THE MEHFIL
+        </span>
+
+        <h2>Create your account</h2>
+
+        <p>
+          Sign up to book your event tickets.
+        </p>
+
+      </div>
+
+
+      <% if (error) { %>
+
+        <div class="alert-error">
+          <%= error %>
+        </div>
+
+      <% } %>
+
+
+      <form action="/register" method="POST">
+
+        <!-- Full Name -->
+        <div class="input-group">
+
+          <label for="name">
+            FULL NAME
+          </label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="<%= old.name || '' %>"
+            placeholder="Your name"
+            required
+            autofocus
+          />
+
+        </div>
+
+
+        <!-- Email -->
+        <div class="input-group">
+
+          <label for="email">
+            EMAIL
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value="<%= old.email || '' %>"
+            placeholder="you@example.com"
+            required
+          />
+
+        </div>
+
+
+        <!-- Phone -->
+        <div class="input-group">
+
+          <label for="phone">
+            PHONE
+          </label>
+
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value="<%= old.phone || '' %>"
+            placeholder="+91 98765 43210"
+          />
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="input-group">
+
+          <label for="password">
+            PASSWORD
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a password"
+            required
+            minlength="6"
+          />
+
+        </div>
+
+
+        <!-- Confirm Password -->
+        <div class="input-group">
+
+          <label for="confirm_password">
+            CONFIRM PASSWORD
+          </label>
+
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="Repeat your password"
+            required
+            minlength="6"
+          />
+
+        </div>
+
+
+        <!-- Submit -->
+        <button type="submit" class="sufi-login-btn">
+
+          <span>
+            Create Account
+          </span>
+
+          <span class="arrow">
+            →
+          </span>
+
+        </button>
+
+      </form>
+
+
+      <p class="switch-auth">
+
+        Already have an account?
+
+        <a href="/login">
+          Enter the Mehfil
+        </a>
+
+      </p>
+
+    </div>
+
+  </div>
+
 </div>
 
 <%- include('partials/footer') %>

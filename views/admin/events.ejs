@@ -24,9 +24,15 @@
         <div class="admin-event-actions">
           <a href="/admin/events/<%= event.id %>/edit" class="btn-mini">Edit</a>
           <a href="/event/<%= event.id %>" target="_blank" class="btn-mini">Preview</a>
-          <form action="/admin/events/<%= event.id %>/delete" method="POST" onsubmit="return confirm('Delete this event? This cannot be undone.');">
-            <button type="submit" class="btn-mini danger">Delete</button>
-          </form>
+<form action="/admin/events/<%= event.id %>/delete" method="POST" style="display:inline;">
+    <button
+        type="button"
+        class="btn-mini danger"
+        onclick="if (confirm('Delete this event? This cannot be undone.')) this.form.submit();"
+    >
+        Delete
+    </button>
+</form>
         </div>
       </div>
     </div>

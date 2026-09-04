@@ -1,39 +1,74 @@
-<% pageTitle = 'Your Ticket - EventBook' %>
+<% pageTitle = 'Your Ticket - Vertex' %>
+
 <%- include('partials/header') %>
 
-<div class="ticket-page">
-  <div class="ticket-card" id="ticket-card">
-    <div class="ticket-top">
-      <h2><%= event.title %></h2>
-      <p><%= event.venue %></p>
-      <p><%= event.start_date %><% if (event.end_date && event.end_date !== event.start_date) { %> - <%= event.end_date %><% } %> <% if (event.event_time) { %>&bull; <%= event.event_time %><% } %></p>
+<main class="ticket-page">
+
+  <section class="ticket-header">
+    <span class="eyebrow">YOUR MEHFIL</span>
+
+    <h1>Your Ticket</h1>
+
+    <p>Your place is reserved. We look forward to welcoming you.</p>
+  </section>
+
+  <section class="ticket-card">
+
+    <div class="ticket-preview">
+      <img
+        src="<%= booking.ticket_image %>"
+        alt="Vertex Event Ticket"
+      />
     </div>
-    <div class="ticket-divider">
-      <span class="notch left"></span>
-      <span class="dashed-line"></span>
-      <span class="notch right"></span>
+
+    <div class="welcome-section">
+
+      <span class="eyebrow">WELCOME TO THE MEHFIL</span>
+
+      <h2>Welcome to a<br>night of Sufi music.</h2>
+
+      <p>
+        Your ticket is confirmed. Bring this ticket with you and
+        immerse yourself in an evening of music, poetry and
+        soulful moments.
+      </p>
+
+      <p class="fine-print">
+        Present this ticket at entry.
+      </p>
+
     </div>
-    <div class="ticket-bottom">
-      <div class="ticket-info">
-        <p><strong>Name:</strong> <%= buyer.name %></p>
-        <p><strong>Category:</strong> <%= booking.category_name %></p>
-        <p><strong>Tickets:</strong> <%= booking.quantity %></p>
-        <p><strong>Amount Paid:</strong> ₹<%= booking.total_amount %></p>
-        <p><strong>Booking Ref:</strong> <%= booking.booking_ref %></p>
-        <p><strong>Ticket Code:</strong> <%= booking.ticket_code %></p>
-      </div>
-      <div class="ticket-qr">
-        <% if (booking.ticket_qr) { %>
-          <img src="<%= booking.ticket_qr %>" alt="Ticket QR Code" />
-        <% } %>
-      </div>
+
+    <div class="ticket-actions">
+
+      <a
+        href="<%= booking.ticket_image %>"
+        download="Vertex-Ticket-<%= booking.ticket_code %>.svg"
+        class="btn-primary"
+      >
+        Download Ticket
+        <span>→</span>
+      </a>
+
+      <button
+        type="button"
+        onclick="window.print()"
+        class="btn-outline"
+      >
+        Print / Save PDF
+      </button>
+
+      <a
+        href="/my-bookings"
+        class="btn-outline"
+      >
+        My Bookings
+      </a>
+
     </div>
-  </div>
-  <p class="fine-print center">Present this ticket (screen or printout) at entry.</p>
-  <div class="ticket-actions">
-    <button onclick="window.print()" class="btn-outline">Print / Save as PDF</button>
-    <a href="/my-bookings" class="btn-outline">My Bookings</a>
-  </div>
-</div>
+
+  </section>
+
+</main>
 
 <%- include('partials/footer') %>

@@ -1,0 +1,14 @@
+node_modules/
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+public/uploads/events/*
+public/uploads/qr/*
+public/uploads/screenshots/*
+public/uploads/misc/*
+!public/uploads/events/.gitkeep
+!public/uploads/qr/.gitkeep
+!public/uploads/screenshots/.gitkeep
+!public/uploads/misc/.gitkeep
+.env

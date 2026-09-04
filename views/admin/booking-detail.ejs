@@ -1,0 +1,61 @@
+<% pageTitle = 'Booking Detail - Admin' %>
+<%- include('partials/header') %>
+
+<a href="/admin/bookings" class="back-link">&larr; Back to Bookings</a>
+<h1>Booking <%= booking.booking_ref %></h1>
+<span class="status-badge status-<%= booking.status %>"><%= booking.status.replace('_',' ') %></span>
+
+<div class="admin-panel-section">
+  <h2>Event</h2>
+  <p><strong><%= booking.event_title %></strong></p>
+  <p><%= booking.event_venue %> &bull; <%= booking.start_date %> <% if (booking.event_time) { %>&bull; <%= booking.event_time %><% } %></p>
+</div>
+
+<div class="admin-panel-section">
+  <h2>Buyer</h2>
+  <p><%= booking.buyer_name %></p>
+  <p><%= booking.buyer_email %></p>
+  <% if (booking.buyer_phone) { %><p><%= booking.buyer_phone %></p><% } %>
+</div>
+
+<div class="admin-panel-section">
+  <h2>Order</h2>
+  <p><%= booking.quantity %> ticket(s) &bull; Total: ₹<%= booking.total_amount %></p>
+  <% if (booking.transaction_note) { %><p>Reference note: <%= booking.transaction_note %></p><% } %>
+</div>
+
+<% if (booking.transaction_screenshot) { %>
+<div class="admin-panel-section">
+  <h2>Payment Screenshot</h2>
+  <a href="<%= booking.transaction_screenshot %>" target="_blank">
+    <img src="<%= booking.transaction_screenshot %>" alt="Transaction screenshot" class="screenshot-preview" />
+  </a>
+</div>
+<% } %>
+
+<% if (booking.status === 'confirmed') { %>
+  <div class="admin-panel-section">
+    <h2>Ticket</h2>
+    <p>Ticket Code: <strong><%= booking.ticket_code %></strong></p>
+    <% if (booking.ticket_qr) { %><img src="<%= booking.ticket_qr %>" alt="Ticket QR" class="qr-image small" /><% } %>
+  </div>
+<% } else if (booking.status === 'rejected') { %>
+  <div class="admin-panel-section">
+    <h2>Rejection Reason</h2>
+    <p><%= booking.rejection_reason %></p>
+  </div>
+<% } %>
+
+<% if (booking.status === 'pending_verification') { %>
+  <div class="admin-actions-row">
+    <form action="/admin/bookings/<%= booking.id %>/confirm" method="POST">
+      <button type="submit" class="btn-primary">Confirm &amp; Generate Ticket</button>
+    </form>
+    <form action="/admin/bookings/<%= booking.id %>/reject" method="POST" class="reject-form">
+      <input type="text" name="reason" placeholder="Reason for rejection (optional)" />
+      <button type="submit" class="btn-outline danger">Reject Payment</button>
+    </form>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

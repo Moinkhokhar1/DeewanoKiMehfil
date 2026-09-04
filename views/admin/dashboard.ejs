@@ -1,0 +1,54 @@
+<% pageTitle = 'Dashboard - Admin' %>
+<%- include('partials/header') %>
+
+<h1>Dashboard</h1>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <p class="stat-label">Total Events</p>
+    <p class="stat-value"><%= eventCount %></p>
+  </div>
+  <div class="stat-card highlight">
+    <p class="stat-label">Pending Verification</p>
+    <p class="stat-value"><%= pendingCount %></p>
+  </div>
+  <div class="stat-card">
+    <p class="stat-label">Confirmed Bookings</p>
+    <p class="stat-value"><%= confirmedCount %></p>
+  </div>
+  <div class="stat-card">
+    <p class="stat-label">Revenue (Confirmed)</p>
+    <p class="stat-value">₹<%= revenue %></p>
+  </div>
+</div>
+
+<div class="admin-actions-row">
+  <a href="/admin/events/new" class="btn-primary">+ Add New Event</a>
+  <a href="/admin/bookings?status=pending_verification" class="btn-outline">Review Pending Payments</a>
+</div>
+
+<h2>Recent Bookings</h2>
+<div class="table-wrap">
+  <table class="admin-table">
+    <thead>
+      <tr><th>Ref</th><th>Event</th><th>Buyer</th><th>Amount</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% recentBookings.forEach(b => { %>
+        <tr>
+          <td><%= b.booking_ref %></td>
+          <td><%= b.event_title %></td>
+          <td><%= b.buyer_name %><br/><small><%= b.buyer_email %></small></td>
+          <td>₹<%= b.total_amount %></td>
+          <td><span class="status-badge status-<%= b.status %>"><%= b.status.replace('_',' ') %></span></td>
+          <td><a href="/admin/bookings/<%= b.id %>" class="btn-mini">View</a></td>
+        </tr>
+      <% }) %>
+      <% if (recentBookings.length === 0) { %>
+        <tr><td colspan="6">No bookings yet.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

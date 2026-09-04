@@ -1,0 +1,38 @@
+<% pageTitle = 'Bookings - Admin' %>
+<%- include('partials/header') %>
+
+<h1>Bookings</h1>
+
+<div class="filter-tabs">
+  <a href="/admin/bookings?status=all" class="<%= filter === 'all' ? 'active' : '' %>">All</a>
+  <a href="/admin/bookings?status=pending_verification" class="<%= filter === 'pending_verification' ? 'active' : '' %>">Pending Verification</a>
+  <a href="/admin/bookings?status=confirmed" class="<%= filter === 'confirmed' ? 'active' : '' %>">Confirmed</a>
+  <a href="/admin/bookings?status=rejected" class="<%= filter === 'rejected' ? 'active' : '' %>">Rejected</a>
+  <a href="/admin/bookings?status=pending_payment" class="<%= filter === 'pending_payment' ? 'active' : '' %>">Awaiting Payment</a>
+</div>
+
+<div class="table-wrap">
+  <table class="admin-table">
+    <thead>
+      <tr><th>Ref</th><th>Event</th><th>Buyer</th><th>Qty</th><th>Amount</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% bookings.forEach(b => { %>
+        <tr>
+          <td><%= b.booking_ref %></td>
+          <td><%= b.event_title %></td>
+          <td><%= b.buyer_name %><br/><small><%= b.buyer_email %></small></td>
+          <td><%= b.quantity %></td>
+          <td>₹<%= b.total_amount %></td>
+          <td><span class="status-badge status-<%= b.status %>"><%= b.status.replace('_',' ') %></span></td>
+          <td><a href="/admin/bookings/<%= b.id %>" class="btn-mini">View</a></td>
+        </tr>
+      <% }) %>
+      <% if (bookings.length === 0) { %>
+        <tr><td colspan="7">No bookings found.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

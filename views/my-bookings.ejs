@@ -1,0 +1,41 @@
+<% pageTitle = 'My Bookings - EventBook' %>
+<%- include('partials/header') %>
+
+<div class="form-page">
+  <h1>My Bookings</h1>
+  <% if (bookings.length === 0) { %>
+    <div class="empty-state">
+      <p>You haven't booked any tickets yet.</p>
+      <a href="/" class="btn-primary">Browse Events</a>
+    </div>
+  <% } %>
+  <% bookings.forEach(b => { %>
+    <div class="booking-row">
+      <div class="booking-row-image">
+        <% if (b.imageList && b.imageList.length > 0) { %>
+          <img src="<%= b.imageList[0] %>" alt="<%= b.event_title %>" />
+        <% } else { %>
+          <div class="no-image small">No Image</div>
+        <% } %>
+      </div>
+      <div class="booking-row-body">
+        <h3><%= b.event_title %></h3>
+        <p class="event-meta">📍 <%= b.event_venue %></p>
+        <p class="event-meta">📅 <%= b.start_date %> <% if (b.event_time) { %>&bull; <%= b.event_time %><% } %></p>
+        <p class="event-meta">🎟️ <%= b.quantity %> ticket(s) &bull; ₹<%= b.total_amount %></p>
+        <span class="status-badge status-<%= b.status %>">
+          <% if (b.status === 'pending_payment') { %>Payment Pending
+          <% } else if (b.status === 'pending_verification') { %>Verifying Payment
+          <% } else if (b.status === 'confirmed') { %>Confirmed
+          <% } else if (b.status === 'rejected') { %>Rejected
+          <% } %>
+        </span>
+      </div>
+      <div class="booking-row-action">
+        <a href="/booking/<%= b.id %>/status" class="btn-mini">View</a>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,24 @@
+<% pageTitle = 'Sign Up - EventBook' %>
+<%- include('partials/header') %>
+
+<div class="form-page auth-page">
+  <h1>Create Account</h1>
+  <p class="form-sub">Sign up to start booking event tickets.</p>
+  <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
+  <form action="/register" method="POST" class="card-form">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" value="<%= old.name || '' %>" required autofocus />
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="<%= old.email || '' %>" required />
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone" value="<%= old.phone || '' %>" />
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required minlength="6" />
+    <label for="confirm_password">Confirm Password</label>
+    <input type="password" id="confirm_password" name="confirm_password" required minlength="6" />
+    <button type="submit" class="btn-primary full-width">Sign Up</button>
+  </form>
+  <p class="switch-auth">Already have an account? <a href="/login">Login</a></p>
+</div>
+
+<%- include('partials/footer') %>

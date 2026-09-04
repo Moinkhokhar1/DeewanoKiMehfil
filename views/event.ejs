@@ -1,0 +1,68 @@
+<% pageTitle = event.title + ' - EventBook' %>
+<%- include('partials/header') %>
+
+<div class="event-detail">
+  <a href="/" class="back-link">&larr; Back</a>
+
+  <div class="carousel" data-carousel>
+    <div class="carousel-track" data-track>
+      <% if (event.imageList.length > 0) { %>
+        <% event.imageList.forEach(img => { %>
+          <div class="carousel-slide"><img src="<%= img %>" alt="<%= event.title %>" /></div>
+        <% }) %>
+      <% } else { %>
+        <div class="carousel-slide"><div class="no-image large">No Image Available</div></div>
+      <% } %>
+    </div>
+    <% if (event.imageList.length > 1) { %>
+      <button class="carousel-btn prev" data-prev aria-label="Previous">&#10094;</button>
+      <button class="carousel-btn next" data-next aria-label="Next">&#10095;</button>
+      <div class="carousel-dots" data-dots>
+        <% event.imageList.forEach((img, i) => { %>
+          <span class="dot <%= i === 0 ? 'active' : '' %>" data-dot="<%= i %>"></span>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+
+  <h1 class="event-title"><%= event.title %></h1>
+  <% if (event.category) { %><span class="event-tag static"><%= event.category %></span><% } %>
+
+  <div class="interest-box">
+    <div>
+      <p class="interest-count">👍 <%= event.interested_count %> are interested</p>
+      <p class="interest-sub">Mark interested to know more about this event.</p>
+    </div>
+    <form action="/event/<%= event.id %>/interest" method="POST">
+      <button type="submit" class="btn-outline-small <%= interested ? 'active' : '' %>">
+        <%= interested ? 'Interested ✓' : 'Interested?' %>
+      </button>
+    </form>
+  </div>
+
+  <div class="detail-list">
+    <div class="detail-row">📅 <span><%= event.start_date %><% if (event.end_date && event.end_date !== event.start_date) { %> - <%= event.end_date %><% } %></span></div>
+    <% if (event.event_time) { %><div class="detail-row">🕗 <span><%= event.event_time %></span></div><% } %>
+    <% if (event.duration) { %><div class="detail-row">⏳ <span><%= event.duration %></span></div><% } %>
+    <% if (event.age_limit) { %><div class="detail-row">👥 <span>Age Limit - <%= event.age_limit %></span></div><% } %>
+    <% if (event.languages) { %><div class="detail-row">🌐 <span><%= event.languages %></span></div><% } %>
+    <% if (event.venue) { %><div class="detail-row">📍 <span><%= event.venue %></span></div><% } %>
+  </div>
+
+  <% if (event.description) { %>
+    <div class="you-should-know">
+      <h3>You should know</h3>
+      <p><%= event.description %></p>
+    </div>
+  <% } %>
+
+  <div class="sticky-book-bar">
+    <div>
+      <div class="price-tag">₹<%= event.price %> onwards</div>
+      <div class="avail-tag">Available</div>
+    </div>
+    <a href="/book/<%= event.id %>" class="btn-primary">Book Now</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

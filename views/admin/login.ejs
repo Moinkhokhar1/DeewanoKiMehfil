@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login - EventBook</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <main class="page-wrap">
+    <div class="form-page auth-page">
+      <h1>Admin Login</h1>
+      <p class="form-sub">Sign in to manage events and bookings.</p>
+      <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
+      <form action="/admin/login" method="POST" class="card-form">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit" class="btn-primary full-width">Login</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

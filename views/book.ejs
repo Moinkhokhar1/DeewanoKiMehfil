@@ -1,0 +1,19 @@
+<% pageTitle = 'Book Tickets - ' + event.title %>
+<%- include('partials/header') %>
+
+<div class="form-page">
+  <a href="/event/<%= event.id %>" class="back-link">&larr; Back to event</a>
+  <h1>Book Tickets</h1>
+  <p class="form-sub"><%= event.title %></p>
+
+  <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
+
+  <form action="/book/<%= event.id %>" method="POST" class="card-form">
+    <label for="quantity">Number of tickets</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required />
+    <p class="price-hint">₹<%= event.price %> per ticket</p>
+    <button type="submit" class="btn-primary full-width">Continue to Payment</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,39 @@
+<% pageTitle = 'Events - Admin' %>
+<%- include('partials/header') %>
+
+<div class="admin-header-row">
+  <h1>Events</h1>
+  <a href="/admin/events/new" class="btn-primary">+ Add New Event</a>
+</div>
+
+<div class="admin-event-grid">
+  <% events.forEach(event => { %>
+    <div class="admin-event-card">
+      <div class="admin-event-image">
+        <% if (event.imageList.length > 0) { %>
+          <img src="<%= event.imageList[0] %>" alt="<%= event.title %>" />
+        <% } else { %>
+          <div class="no-image">No Image</div>
+        <% } %>
+        <% if (!event.is_published) { %><span class="draft-badge">Draft</span><% } %>
+      </div>
+      <div class="admin-event-body">
+        <h3><%= event.title %></h3>
+        <p class="event-meta">📅 <%= event.start_date %></p>
+        <p class="event-meta">₹<%= event.price %> &bull; <%= event.imageList.length %> image(s)</p>
+        <div class="admin-event-actions">
+          <a href="/admin/events/<%= event.id %>/edit" class="btn-mini">Edit</a>
+          <a href="/event/<%= event.id %>" target="_blank" class="btn-mini">Preview</a>
+          <form action="/admin/events/<%= event.id %>/delete" method="POST" onsubmit="return confirm('Delete this event? This cannot be undone.');">
+            <button type="submit" class="btn-mini danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+  <% if (events.length === 0) { %>
+    <p>No events yet. <a href="/admin/events/new">Create your first event</a>.</p>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

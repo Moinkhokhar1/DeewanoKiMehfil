@@ -1,0 +1,29 @@
+<% pageTitle = 'Booking Status - EventBook' %>
+<%- include('partials/header') %>
+
+<div class="form-page center-page">
+  <% if (booking.status === 'pending_payment') { %>
+    <div class="status-icon">⏳</div>
+    <h1>Payment Pending</h1>
+    <p class="form-sub">Please complete your payment to proceed.</p>
+    <a href="/checkout/<%= booking.id %>" class="btn-primary">Go to Payment</a>
+  <% } else if (booking.status === 'pending_verification') { %>
+    <div class="status-icon">🕵️</div>
+    <h1>Verification in Progress</h1>
+    <p class="form-sub">We've received your payment proof for <strong><%= event.title %></strong>. Your ticket will be generated once the organizer verifies it. This page will update once confirmed — check back soon.</p>
+    <p class="fine-print">Booking Ref: <%= booking.booking_ref %></p>
+    <a href="/my-bookings" class="btn-outline">View My Bookings</a>
+  <% } else if (booking.status === 'confirmed') { %>
+    <div class="status-icon">✅</div>
+    <h1>Booking Confirmed!</h1>
+    <p class="form-sub">Your ticket for <strong><%= event.title %></strong> is ready.</p>
+    <a href="/ticket/<%= booking.id %>" class="btn-primary">View Ticket</a>
+  <% } else if (booking.status === 'rejected') { %>
+    <div class="status-icon">❌</div>
+    <h1>Payment Could Not Be Verified</h1>
+    <p class="form-sub"><%= booking.rejection_reason || 'Please contact the organizer for assistance.' %></p>
+    <a href="/checkout/<%= booking.id %>" class="btn-outline">Contact Organizer</a>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

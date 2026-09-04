@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle : 'Admin - EventBook' %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="admin-body">
+  <header class="admin-topbar">
+    <a href="/admin/dashboard" class="brand">🎟️ EventBook Admin</a>
+    <button class="admin-menu-toggle" id="adminMenuToggle">&#9776;</button>
+  </header>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <a href="/admin/dashboard">Dashboard</a>
+      <a href="/admin/events">Events</a>
+      <a href="/admin/bookings">Bookings</a>
+      <a href="/admin/profile">Profile &amp; QR Code</a>
+      <a href="/" target="_blank">View Site &#8599;</a>
+      <form action="/admin/logout" method="POST">
+        <button type="submit" class="link-btn">Logout</button>
+      </form>
+    </aside>
+    <main class="admin-content">

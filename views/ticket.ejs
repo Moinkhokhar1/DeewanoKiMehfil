@@ -1,0 +1,38 @@
+<% pageTitle = 'Your Ticket - EventBook' %>
+<%- include('partials/header') %>
+
+<div class="ticket-page">
+  <div class="ticket-card" id="ticket-card">
+    <div class="ticket-top">
+      <h2><%= event.title %></h2>
+      <p><%= event.venue %></p>
+      <p><%= event.start_date %><% if (event.end_date && event.end_date !== event.start_date) { %> - <%= event.end_date %><% } %> <% if (event.event_time) { %>&bull; <%= event.event_time %><% } %></p>
+    </div>
+    <div class="ticket-divider">
+      <span class="notch left"></span>
+      <span class="dashed-line"></span>
+      <span class="notch right"></span>
+    </div>
+    <div class="ticket-bottom">
+      <div class="ticket-info">
+        <p><strong>Name:</strong> <%= buyer.name %></p>
+        <p><strong>Tickets:</strong> <%= booking.quantity %></p>
+        <p><strong>Amount Paid:</strong> ₹<%= booking.total_amount %></p>
+        <p><strong>Booking Ref:</strong> <%= booking.booking_ref %></p>
+        <p><strong>Ticket Code:</strong> <%= booking.ticket_code %></p>
+      </div>
+      <div class="ticket-qr">
+        <% if (booking.ticket_qr) { %>
+          <img src="<%= booking.ticket_qr %>" alt="Ticket QR Code" />
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <p class="fine-print center">Present this ticket (screen or printout) at entry.</p>
+  <div class="ticket-actions">
+    <button onclick="window.print()" class="btn-outline">Print / Save as PDF</button>
+    <a href="/my-bookings" class="btn-outline">My Bookings</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

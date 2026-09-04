@@ -1,0 +1,81 @@
+const Database = require('better-sqlite3');
+const path = require('path');
+const bcrypt = require('bcryptjs');
+
+const db = new Database(path.join(__dirname, '..', 'data', 'app.db'));
+db.pragma('journal_mode = WAL');
+
+db.exec(`
+CREATE TABLE IF NOT EXISTS admins (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  qr_image TEXT,
+  payment_note TEXT,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS buyers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  phone TEXT,
+  password_hash TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  category TEXT,
+  description TEXT,
+  venue TEXT,
+  start_date TEXT,
+  end_date TEXT,
+  event_time TEXT,
+  duration TEXT,
+  age_limit TEXT,
+  languages TEXT,
+  price REAL NOT NULL DEFAULT 0,
+  images TEXT DEFAULT '[]',
+  is_published INTEGER DEFAULT 1,
+  interested_count INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS bookings (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  booking_ref TEXT UNIQUE NOT NULL,
+  event_id INTEGER NOT NULL,
+  buyer_id INTEGER NOT NULL,
+  quantity INTEGER NOT NULL DEFAULT 1,
+  total_amount REAL NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending_payment',
+  transaction_screenshot TEXT,
+  transaction_note TEXT,
+  ticket_code TEXT,
+  ticket_qr TEXT,
+  rejection_reason TEXT,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(event_id) REFERENCES events(id),
+  FOREIGN KEY(buyer_id) REFERENCES buyers(id)
+);
+
+CREATE TABLE IF NOT EXISTS interests (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  event_id INTEGER NOT NULL,
+  buyer_id INTEGER NOT NULL,
+  UNIQUE(event_id, buyer_id)
+);
+`);
+
+// Seed a default admin if none exists
+const adminCount = db.prepare('SELECT COUNT(*) as c FROM admins').get().c;
+if (adminCount === 0) {
+  const hash = bcrypt.hashSync('admin123', 10);
+  db.prepare('INSERT INTO admins (username, password_hash) VALUES (?, ?)').run('admin', hash);
+  console.log('Seeded default admin -> username: admin / password: admin123 (change this after first login)');
+}
+
+module.exports = db;

@@ -1,0 +1,18 @@
+<% pageTitle = 'Login - EventBook' %>
+<%- include('partials/header') %>
+
+<div class="form-page auth-page">
+  <h1>Welcome Back</h1>
+  <p class="form-sub">Login to book and manage your tickets.</p>
+  <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
+  <form action="/login" method="POST" class="card-form">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="<%= old.email || '' %>" required autofocus />
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required />
+    <button type="submit" class="btn-primary full-width">Login</button>
+  </form>
+  <p class="switch-auth">New here? <a href="/register">Create an account</a></p>
+</div>
+
+<%- include('partials/footer') %>

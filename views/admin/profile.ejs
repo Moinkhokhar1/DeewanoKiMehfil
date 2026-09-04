@@ -1,0 +1,44 @@
+<% pageTitle = 'Profile - Admin' %>
+<%- include('partials/header') %>
+
+<h1>Profile &amp; Payment QR Code</h1>
+
+<% if (message) { %><div class="alert-success"><%= message %></div><% } %>
+<% if (error) { %><div class="alert-error"><%= error %></div><% } %>
+
+<div class="admin-panel-section">
+  <h2>Payment QR Code</h2>
+  <p class="fine-print">This QR code will be shown to buyers on the payment page so they can scan and pay you directly. They'll then upload a screenshot of their transaction for you to verify.</p>
+
+  <% if (admin.qr_image) { %>
+    <div class="current-qr">
+      <img src="<%= admin.qr_image %>" alt="Current QR Code" />
+      <p class="fine-print">Current QR Code</p>
+    </div>
+  <% } %>
+
+  <form action="/admin/profile/qr" method="POST" enctype="multipart/form-data" class="card-form">
+    <label for="qr_image">Upload New QR Code Image</label>
+    <input type="file" id="qr_image" name="qr_image" accept="image/*" />
+
+    <label for="payment_note">Payment Instructions / Note (optional)</label>
+    <textarea id="payment_note" name="payment_note" rows="3" placeholder="e.g. Pay to UPI ID: yourname@upi. Include your name in the note."><%= admin.payment_note || '' %></textarea>
+
+    <button type="submit" class="btn-primary full-width">Save QR &amp; Payment Details</button>
+  </form>
+</div>
+
+<div class="admin-panel-section">
+  <h2>Change Password</h2>
+  <form action="/admin/profile/password" method="POST" class="card-form">
+    <label for="current_password">Current Password</label>
+    <input type="password" id="current_password" name="current_password" required />
+    <label for="new_password">New Password</label>
+    <input type="password" id="new_password" name="new_password" required minlength="6" />
+    <label for="confirm_password">Confirm New Password</label>
+    <input type="password" id="confirm_password" name="confirm_password" required minlength="6" />
+    <button type="submit" class="btn-outline full-width">Update Password</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

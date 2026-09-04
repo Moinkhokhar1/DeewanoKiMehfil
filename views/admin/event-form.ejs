@@ -1,0 +1,85 @@
+<% pageTitle = (event ? 'Edit Event' : 'New Event') + ' - Admin' %>
+<%- include('partials/header') %>
+
+<h1><%= event ? 'Edit Event' : 'Add New Event' %></h1>
+
+<% if (error) { %><div class="alert-error"><%= error %></div><% } %>
+
+<form action="<%= event ? '/admin/events/' + event.id + '/edit' : '/admin/events/new' %>" method="POST" enctype="multipart/form-data" class="card-form wide-form">
+  <label for="title">Event Title *</label>
+  <input type="text" id="title" name="title" value="<%= event ? event.title : '' %>" required />
+
+  <label for="category">Category</label>
+  <input type="text" id="category" name="category" placeholder="e.g. Navratri Celebration" value="<%= event ? event.category : '' %>" />
+
+  <div class="form-row-2">
+    <div>
+      <label for="start_date">Start Date *</label>
+      <input type="date" id="start_date" name="start_date" value="<%= event ? event.start_date : '' %>" required />
+    </div>
+    <div>
+      <label for="end_date">End Date</label>
+      <input type="date" id="end_date" name="end_date" value="<%= event ? event.end_date : '' %>" />
+    </div>
+  </div>
+
+  <div class="form-row-2">
+    <div>
+      <label for="event_time">Time</label>
+      <input type="text" id="event_time" name="event_time" placeholder="e.g. 8:00 PM" value="<%= event ? event.event_time : '' %>" />
+    </div>
+    <div>
+      <label for="duration">Duration</label>
+      <input type="text" id="duration" name="duration" placeholder="e.g. 4 Hours" value="<%= event ? event.duration : '' %>" />
+    </div>
+  </div>
+
+  <div class="form-row-2">
+    <div>
+      <label for="age_limit">Age Limit</label>
+      <input type="text" id="age_limit" name="age_limit" placeholder="e.g. 14yrs +" value="<%= event ? event.age_limit : '' %>" />
+    </div>
+    <div>
+      <label for="languages">Languages</label>
+      <input type="text" id="languages" name="languages" placeholder="e.g. Hindi, Gujarati" value="<%= event ? event.languages : '' %>" />
+    </div>
+  </div>
+
+  <label for="venue">Venue *</label>
+  <input type="text" id="venue" name="venue" value="<%= event ? event.venue : '' %>" required />
+
+  <label for="price">Price (₹) *</label>
+  <input type="number" id="price" name="price" step="0.01" min="0" value="<%= event ? event.price : '' %>" required />
+
+  <label for="description">Description / "You Should Know"</label>
+  <textarea id="description" name="description" rows="5"><%= event ? event.description : '' %></textarea>
+
+  <label for="images">Event Photos (upload from device)</label>
+  <input type="file" id="images" name="images" accept="image/*" multiple />
+  <p class="fine-print">You can select multiple images. First image is used as the cover photo. Max 8 images, 8MB each.</p>
+
+  <% if (event && event.imageList && event.imageList.length > 0) { %>
+    <div class="existing-images">
+      <p class="fine-print">Current images (check to remove):</p>
+      <div class="existing-images-grid">
+        <% event.imageList.forEach(img => { %>
+          <label class="existing-image-item">
+            <img src="<%= img %>" alt="event image" />
+            <span><input type="checkbox" name="remove_images" value="<%= img %>" /> Remove</span>
+          </label>
+        <% }) %>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (event) { %>
+    <label class="checkbox-label">
+      <input type="checkbox" name="is_published" <%= event.is_published ? 'checked' : '' %> />
+      Published (visible to buyers)
+    </label>
+  <% } %>
+
+  <button type="submit" class="btn-primary full-width"><%= event ? 'Save Changes' : 'Create Event' %></button>
+</form>
+
+<%- include('partials/footer') %>

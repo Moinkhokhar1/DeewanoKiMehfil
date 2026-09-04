@@ -94,6 +94,7 @@ function columnExists(table, column) {
 if (!columnExists('bookings', 'category_id')) db.exec('ALTER TABLE bookings ADD COLUMN category_id INTEGER');
 if (!columnExists('bookings', 'category_name')) db.exec('ALTER TABLE bookings ADD COLUMN category_name TEXT');
 if (!columnExists('bookings', 'unit_price')) db.exec('ALTER TABLE bookings ADD COLUMN unit_price REAL DEFAULT 0');
+if (!columnExists('events', 'terms_conditions')) db.exec("ALTER TABLE events ADD COLUMN terms_conditions TEXT DEFAULT ''");
 
 // --- Migration: give any event with no categories yet a "General" category using its old single price ---
 db.prepare('SELECT id, price FROM events').all().forEach(ev => {

@@ -65,6 +65,10 @@
   <label for="description">Description / "You Should Know"</label>
   <textarea id="description" name="description" rows="5"><%= event ? event.description : '' %></textarea>
 
+  <label for="terms_conditions">Terms &amp; Conditions</label>
+<textarea id="terms_conditions" name="terms_conditions" rows="5" placeholder="One point per line, e.g.&#10;No refunds after booking.&#10;Entry subject to security check.&#10;Management reserves the right of admission."><%= event ? event.terms_conditions : '' %></textarea>
+<p class="fine-print">One line per rule — each line will be shown as a separate bullet point to the buyer.</p>
+
   <label for="images">Event Photos (upload from device)</label>
   <input type="file" id="images" name="images" accept="image/*" multiple />
   <p class="fine-print">You can select multiple images. First image is used as the cover photo. Max 8 images, 8MB each.</p>

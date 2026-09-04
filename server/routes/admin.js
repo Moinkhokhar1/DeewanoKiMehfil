@@ -84,7 +84,7 @@ router.post('/events/new', requireAdmin, (req, res, next) => {
     next();
   });
 }, (req, res) => {
-  const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages } = req.body;
+const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions } = req.body;
   if (!title || !start_date) {
     return res.render('admin/event-form', { event: null, categories: [], error: 'Title and start date are required.' });
   }
@@ -97,11 +97,11 @@ router.post('/events/new', requireAdmin, (req, res, next) => {
   const images = (req.files || []).map(f => '/uploads/events/' + f.filename);
   const startingPrice = Math.min(...cats.map(c => c.price));
 
-  const info = db.prepare(`INSERT INTO events (title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, price, images)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
-    title.trim(), category || '', description || '', venue || '', start_date, end_date || start_date,
-    event_time || '', duration || '', age_limit || '', languages || '', startingPrice, JSON.stringify(images)
-  );
+const info = db.prepare(`INSERT INTO events (title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions, price, images)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
+  title.trim(), category || '', description || '', venue || '', start_date, end_date || start_date,
+  event_time || '', duration || '', age_limit || '', languages || '', terms_conditions || '', startingPrice, JSON.stringify(images)
+);
 
   const insertCat = db.prepare('INSERT INTO ticket_categories (event_id, name, price, sort_order) VALUES (?, ?, ?, ?)');
   cats.forEach((c, i) => insertCat.run(info.lastInsertRowid, c.name, c.price, i));
@@ -128,7 +128,7 @@ router.post('/events/:id/edit', requireAdmin, (req, res, next) => {
 }, (req, res) => {
   const event = db.prepare('SELECT * FROM events WHERE id = ?').get(req.params.id);
   if (!event) return res.status(404).render('404');
-  const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, is_published, remove_images } = req.body;
+ const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions } = req.body;
 
   const cats = parseCategories(req.body);
   if (cats.length === 0) {
@@ -143,11 +143,10 @@ router.post('/events/:id/edit', requireAdmin, (req, res, next) => {
   images = images.concat(newImages);
 
   const startingPrice = Math.min(...cats.map(c => c.price));
-
-  db.prepare(`UPDATE events SET title=?, category=?, description=?, venue=?, start_date=?, end_date=?, event_time=?, duration=?, age_limit=?, languages=?, price=?, images=?, is_published=? WHERE id=?`)
-    .run(title.trim(), category || '', description || '', venue || '', start_date, end_date || start_date,
-      event_time || '', duration || '', age_limit || '', languages || '', startingPrice, JSON.stringify(images),
-      is_published ? 1 : 0, event.id);
+db.prepare(`UPDATE events SET title=?, category=?, description=?, venue=?, start_date=?, end_date=?, event_time=?, duration=?, age_limit=?, languages=?, terms_conditions=?, price=?, images=?, is_published=? WHERE id=?`)
+  .run(title.trim(), category || '', description || '', venue || '', start_date, end_date || start_date,
+    event_time || '', duration || '', age_limit || '', languages || '', terms_conditions || '', startingPrice, JSON.stringify(images),
+    is_published ? 1 : 0, event.id);
 
   db.prepare('DELETE FROM ticket_categories WHERE event_id = ?').run(event.id);
   const insertCat = db.prepare('INSERT INTO ticket_categories (event_id, name, price, sort_order) VALUES (?, ?, ?, ?)');
@@ -157,8 +156,23 @@ router.post('/events/:id/edit', requireAdmin, (req, res, next) => {
 });
 
 router.post('/events/:id/delete', requireAdmin, (req, res) => {
-  db.prepare('DELETE FROM ticket_categories WHERE event_id = ?').run(req.params.id);
-  db.prepare('DELETE FROM events WHERE id = ?').run(req.params.id);
+  const eventId = req.params.id;
+  const bookingCount = db.prepare('SELECT COUNT(*) c FROM bookings WHERE event_id = ?').get(eventId).c;
+
+  if (bookingCount > 0) {
+    const events = db.prepare('SELECT * FROM events ORDER BY created_at DESC').all().map(parseImages);
+    return res.render('admin/events', {
+      events,
+      error: `Can't delete this event — it already has ${bookingCount} booking(s). Unpublish it instead if you want to hide it from buyers.`
+    });
+  }
+
+  const deleteEventTx = db.transaction((id) => {
+    db.prepare('DELETE FROM ticket_categories WHERE event_id = ?').run(id);
+    db.prepare('DELETE FROM events WHERE id = ?').run(id);
+  });
+  deleteEventTx(eventId);
+
   res.redirect('/admin/events');
 });
 

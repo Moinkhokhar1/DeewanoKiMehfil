@@ -329,6 +329,21 @@ img { max-width: 100%; display: block; }
 .admin-sidebar a, .admin-sidebar .link-btn {
   padding: 12px 20px; font-size: 0.95rem; color: var(--text); text-align: left;
 }
+.about-text.truncated {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.read-more-link { background: none; border: none; color: var(--primary); font-weight: 600; padding: 4px 0; cursor: pointer; }
+
+.tnc-accordion { border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 16px 0; }
+.tnc-header { width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; padding: 14px 0; font-weight: 600; font-size: 1rem; cursor: pointer; }
+.tnc-arrow { transition: transform 0.2s; }
+.tnc-header.open .tnc-arrow { transform: rotate(90deg); }
+.tnc-body ul { padding-left: 20px; margin: 0 0 14px; color: #444; }
+.tnc-body li { margin-bottom: 6px; }
+
 .admin-sidebar a:hover { background: var(--bg); }
 .admin-sidebar form { margin: 0; }
 .admin-sidebar .link-btn { width: 100%; color: var(--danger); font-weight: 600; }

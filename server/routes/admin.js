@@ -84,7 +84,7 @@ router.post('/events/new', requireAdmin, (req, res, next) => {
     next();
   });
 }, (req, res) => {
-const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions } = req.body;
+const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions, remove_images, is_published } = req.body;
   if (!title || !start_date) {
     return res.render('admin/event-form', { event: null, categories: [], error: 'Title and start date are required.' });
   }
@@ -128,7 +128,7 @@ router.post('/events/:id/edit', requireAdmin, (req, res, next) => {
 }, (req, res) => {
   const event = db.prepare('SELECT * FROM events WHERE id = ?').get(req.params.id);
   if (!event) return res.status(404).render('404');
- const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions } = req.body;
+ const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions, remove_images, is_published } = req.body;
 
   const cats = parseCategories(req.body);
   if (cats.length === 0) {

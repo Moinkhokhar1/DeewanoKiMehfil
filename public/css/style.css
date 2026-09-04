@@ -92,6 +92,7 @@ img { max-width: 100%; display: block; }
   cursor: pointer;
 }
 
+
 /* ---------- Event grid / cards ---------- */
 .event-grid {
   display: grid;
@@ -332,6 +333,16 @@ img { max-width: 100%; display: block; }
 .admin-sidebar form { margin: 0; }
 .admin-sidebar .link-btn { width: 100%; color: var(--danger); font-weight: 600; }
 .admin-content { flex: 1; padding: 24px; max-width: 1000px; }
+
+.category-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+.category-row input[type="text"] { flex: 2; }
+.category-row input[type="number"] { flex: 1; }
+.btn-remove-row { background: none; border: none; color: #c00; font-size: 1.2rem; cursor: pointer; padding: 0 8px; }
+
+
+.category-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.category-option { display: flex; align-items: center; gap: 10px; border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; cursor: pointer; }
+.category-option-name { flex: 1; font-weight: 600; }
 
 .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 16px 0 24px; }
 .stat-card { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }

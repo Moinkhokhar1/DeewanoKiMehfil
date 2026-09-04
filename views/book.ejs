@@ -8,12 +8,50 @@
 
   <% if (error) { %><div class="alert-error"><%= error %></div><% } %>
 
-  <form action="/book/<%= event.id %>" method="POST" class="card-form">
-    <label for="quantity">Number of tickets</label>
-    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required />
-    <p class="price-hint">₹<%= event.price %> per ticket</p>
-    <button type="submit" class="btn-primary full-width">Continue to Payment</button>
-  </form>
+  <% if (categories.length === 0) { %>
+    <div class="alert-error">No ticket categories have been set up for this event yet.</div>
+  <% } else { %>
+    <form action="/book/<%= event.id %>" method="POST" class="card-form" id="book-form">
+      <label>Select Ticket Category</label>
+      <div class="category-options">
+        <% categories.forEach((cat, i) => { %>
+          <label class="category-option">
+            <input type="radio" name="category_id" value="<%= cat.id %>" data-price="<%= cat.price %>" <%= i === 0 ? 'checked' : '' %> required />
+            <span class="category-option-name"><%= cat.name %></span>
+            <span class="category-option-price">₹<%= cat.price %></span>
+          </label>
+        <% }) %>
+      </div>
+
+      <label for="quantity">Number of tickets</label>
+      <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required />
+      <p class="price-hint">₹<span id="unit-price"><%= categories[0].price %></span> per ticket &bull; Total: ₹<span id="total-price"><%= categories[0].price %></span></p>
+
+      <button type="submit" class="btn-primary full-width">Continue to Payment</button>
+    </form>
+  <% } %>
 </div>
+
+<script>
+  (function () {
+    const form = document.getElementById('book-form');
+    if (!form) return;
+    const qtyInput = form.querySelector('#quantity');
+    const unitEl = document.getElementById('unit-price');
+    const totalEl = document.getElementById('total-price');
+
+    function update() {
+      const selected = form.querySelector('input[name="category_id"]:checked');
+      const price = selected ? parseFloat(selected.dataset.price) || 0 : 0;
+      const qty = parseInt(qtyInput.value, 10) || 1;
+      unitEl.textContent = price.toFixed(2);
+      totalEl.textContent = (price * qty).toFixed(2);
+    }
+
+    form.querySelectorAll('input[name="category_id"]').forEach(r => r.addEventListener('change', update));
+    qtyInput.addEventListener('input', update);
+    update();
+  })();
+</script>
 
 <%- include('partials/footer') %>

@@ -7,7 +7,8 @@
 
   <div class="order-summary">
     <h3><%= event.title %></h3>
-    <p><%= booking.quantity %> ticket(s) &times; ₹<%= event.price %></p>
+    <% if (booking.category_name) { %><p class="category-badge"><%= booking.category_name %></p><% } %>
+    <p><%= booking.quantity %> ticket(s) &times; ₹<%= booking.unit_price %></p>
     <p class="total-amount">Total: ₹<%= booking.total_amount %></p>
   </div>
 

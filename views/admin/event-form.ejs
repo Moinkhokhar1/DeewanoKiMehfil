@@ -48,8 +48,19 @@
   <label for="venue">Venue *</label>
   <input type="text" id="venue" name="venue" value="<%= event ? event.venue : '' %>" required />
 
-  <label for="price">Price (₹) *</label>
-  <input type="number" id="price" name="price" step="0.01" min="0" value="<%= event ? event.price : '' %>" required />
+  <label>Ticket Categories *</label>
+<div id="category-rows">
+  <% var cats = (categories && categories.length > 0) ? categories : [{ name: '', price: '' }]; %>
+  <% cats.forEach(function(cat) { %>
+    <div class="category-row">
+      <input type="text" name="category_name" placeholder="e.g. General" value="<%= cat.name %>" required />
+      <input type="number" name="category_price" placeholder="Price (₹)" step="0.01" min="0" value="<%= cat.price %>" required />
+      <button type="button" class="btn-remove-row" onclick="this.parentElement.remove()">&times;</button>
+    </div>
+  <% }) %>
+</div>
+<button type="button" id="add-category-btn" class="btn-outline-small">+ Add Category</button>
+<p class="fine-print">Add a row for each ticket type (e.g. General, VIP, Balcony, VVIP) with its price.</p>
 
   <label for="description">Description / "You Should Know"</label>
   <textarea id="description" name="description" rows="5"><%= event ? event.description : '' %></textarea>
@@ -83,3 +94,16 @@
 </form>
 
 <%- include('partials/footer') %>
+
+<script>
+  document.getElementById('add-category-btn').addEventListener('click', function () {
+    const wrap = document.getElementById('category-rows');
+    const row = document.createElement('div');
+    row.className = 'category-row';
+    row.innerHTML =
+      '<input type="text" name="category_name" placeholder="e.g. VIP" required />' +
+      '<input type="number" name="category_price" placeholder="Price (₹)" step="0.01" min="0" required />' +
+      '<button type="button" class="btn-remove-row" onclick="this.parentElement.remove()">&times;</button>';
+    wrap.appendChild(row);
+  });
+</script>

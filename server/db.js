@@ -68,6 +68,16 @@ CREATE TABLE IF NOT EXISTS interests (
   buyer_id INTEGER NOT NULL,
   UNIQUE(event_id, buyer_id)
 );
+
+CREATE TABLE IF NOT EXISTS ticket_categories (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  event_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  price REAL NOT NULL DEFAULT 0,
+  sort_order INTEGER DEFAULT 0,
+  FOREIGN KEY(event_id) REFERENCES events(id)
+);
+
 `);
 
 // Seed a default admin if none exists
@@ -77,5 +87,21 @@ if (adminCount === 0) {
   db.prepare('INSERT INTO admins (username, password_hash) VALUES (?, ?)').run('admin', hash);
   console.log('Seeded default admin -> username: admin / password: admin123 (change this after first login)');
 }
+// --- Migration: add category snapshot columns to bookings if missing ---
+function columnExists(table, column) {
+  return db.prepare(`PRAGMA table_info(${table})`).all().some(c => c.name === column);
+}
+if (!columnExists('bookings', 'category_id')) db.exec('ALTER TABLE bookings ADD COLUMN category_id INTEGER');
+if (!columnExists('bookings', 'category_name')) db.exec('ALTER TABLE bookings ADD COLUMN category_name TEXT');
+if (!columnExists('bookings', 'unit_price')) db.exec('ALTER TABLE bookings ADD COLUMN unit_price REAL DEFAULT 0');
+
+// --- Migration: give any event with no categories yet a "General" category using its old single price ---
+db.prepare('SELECT id, price FROM events').all().forEach(ev => {
+  const count = db.prepare('SELECT COUNT(*) c FROM ticket_categories WHERE event_id = ?').get(ev.id).c;
+  if (count === 0) {
+    db.prepare('INSERT INTO ticket_categories (event_id, name, price, sort_order) VALUES (?, ?, ?, 0)')
+      .run(ev.id, 'General', ev.price || 0);
+  }
+});
 
 module.exports = db;

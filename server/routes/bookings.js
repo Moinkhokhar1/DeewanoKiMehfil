@@ -9,23 +9,36 @@ function genBookingRef() {
   return 'BK' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 6).toUpperCase();
 }
 
-// Step 1: choose quantity
+function getCategories(eventId) {
+  return db.prepare('SELECT * FROM ticket_categories WHERE event_id = ? ORDER BY sort_order, id').all(eventId);
+}
+
+// Step 1: choose category + quantity
 router.get('/book/:eventId', requireBuyer, (req, res) => {
   const event = db.prepare('SELECT * FROM events WHERE id = ?').get(req.params.eventId);
   if (!event) return res.status(404).render('404');
-  res.render('book', { event, error: null });
+  res.render('book', { event, categories: getCategories(event.id), error: null });
 });
 
 router.post('/book/:eventId', requireBuyer, (req, res) => {
   const event = db.prepare('SELECT * FROM events WHERE id = ?').get(req.params.eventId);
   if (!event) return res.status(404).render('404');
+  const categories = getCategories(event.id);
+
+  const category = categories.find(c => c.id === parseInt(req.body.category_id, 10));
+  if (!category) {
+    return res.render('book', { event, categories, error: 'Please select a valid ticket category.' });
+  }
+
   let qty = parseInt(req.body.quantity, 10);
   if (!qty || qty < 1) qty = 1;
   if (qty > 10) qty = 10;
-  const total = +(event.price * qty).toFixed(2);
+
+  const total = +(category.price * qty).toFixed(2);
   const ref = genBookingRef();
-  const info = db.prepare(`INSERT INTO bookings (booking_ref, event_id, buyer_id, quantity, total_amount, status)
-    VALUES (?, ?, ?, ?, ?, 'pending_payment')`).run(ref, event.id, req.session.buyerId, qty, total);
+  const info = db.prepare(`INSERT INTO bookings (booking_ref, event_id, buyer_id, quantity, total_amount, status, category_id, category_name, unit_price)
+    VALUES (?, ?, ?, ?, ?, 'pending_payment', ?, ?, ?)`)
+    .run(ref, event.id, req.session.buyerId, qty, total, category.id, category.name, category.price);
   res.redirect(`/checkout/${info.lastInsertRowid}`);
 });
 

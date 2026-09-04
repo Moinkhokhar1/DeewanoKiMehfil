@@ -2904,7 +2904,83 @@ img { max-width: 100%; display: block; }
    BOOKING CARD
    ========================================================= */
 
-.vertex-booking-card {
+   .vertex-booking-card {
+  position: sticky;
+  top: 95px;
+
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: 220px;
+  overflow: hidden;
+
+  padding: 30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 24, 19, 0.96),
+      rgba(14, 12, 10, 0.98)
+    );
+  border: 1px solid #393027;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.vertex-booking-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(199, 148, 50, 0.38);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+}
+
+.vertex-booking-media {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vertex-booking-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.vertex-booking-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertex-booking-card h3 {
+  margin: 0;
+  color: #f5eee4;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.8px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .vertex-booking-card {
+    grid-template-columns: 180px minmax(0, 1fr);
+    padding: 25px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .vertex-booking-card {
+    position: static;
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+}
+
+/* .vertex-booking-card {
   position: sticky;
 
   top: 95px;
@@ -2922,7 +2998,7 @@ img { max-width: 100%; display: block; }
 
   box-shadow:
     0 25px 70px rgba(0, 0, 0, 0.28);
-}
+} */
 
 
 .vertex-booking-card h3 {
@@ -3066,11 +3142,11 @@ img { max-width: 100%; display: block; }
     gap: 50px;
   }
 
-  .vertex-booking-card {
+  /* .vertex-booking-card {
     position: static;
 
     max-width: 500px;
-  }
+  } */
 
 }
 
@@ -3147,9 +3223,9 @@ img { max-width: 100%; display: block; }
   }
 
 
-  .vertex-booking-card {
+  /* .vertex-booking-card {
     padding: 25px;
-  }
+  } */
 
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -5008,7 +5084,7 @@ margin-right: 28px;
    BOOKING CARD
    ========================================================= */
 
-.vertex-booking-card {
+/* .vertex-booking-card {
   display: grid;
 
   grid-template-columns: 220px minmax(0, 1fr);
@@ -5025,7 +5101,7 @@ margin-right: 28px;
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease;
-}
+} */
 
 
 .vertex-booking-card:hover {
@@ -5425,9 +5501,9 @@ margin-right: 28px;
 
 @media (max-width: 850px) {
 
-  .vertex-booking-card {
+  /* .vertex-booking-card {
     grid-template-columns: 180px minmax(0, 1fr);
-  }
+  } */
 
   .vertex-booking-content {
     padding: 24px;
@@ -5460,9 +5536,7 @@ margin-right: 28px;
     width: 100%;
   }
 
-  .vertex-booking-card {
-    grid-template-columns: 1fr;
-  }
+
 
   .vertex-booking-image {
     height: 240px;
@@ -5866,7 +5940,65 @@ margin-right: 28px;
   }
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+.mehfil-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 30px;
+}
 
+.mehfil-404-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+
+  max-width: 480px;
+  width: 100%;
+  padding: 50px 40px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 24, 19, 0.96),
+      rgba(14, 12, 10, 0.98)
+    );
+  border: 1px solid #393027;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+}
+
+.mehfil-404-icon {
+  font-size: 40px;
+  opacity: 0.7;
+  filter: grayscale(0.3);
+}
+
+.mehfil-404-card h1 {
+  margin: 0;
+  color: #f5eee4;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.8px;
+}
+
+.mehfil-404-text {
+  margin: 0;
+  color: #a89e90;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.mehfil-404-card .vertex-booking-divider {
+  width: 100%;
+}
+
+.mehfil-404-card .vertex-book-btn {
+  justify-content: center;
+}
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */

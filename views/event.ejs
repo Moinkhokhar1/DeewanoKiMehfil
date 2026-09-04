@@ -314,49 +314,46 @@
 
 
         <!-- BOOKING CARD -->
-        <aside class="vertex-booking-card">
+       <aside class="vertex-booking-card">
 
-          <span class="vertex-section-label">
-            YOUR EVENING AWAITS
-          </span>
+  <div class="vertex-booking-media">
+    <span class="vertex-section-label">
+      YOUR EVENING AWAITS
+    </span>
 
-          <h3>
-            Reserve your place<br>
-            in the Mehfil.
-          </h3>
+    <div class="vertex-availability">
+      <span></span>
+      Available
+    </div>
 
-          <div class="vertex-booking-divider"></div>
+    <img
+      src="../public/assets/939e639a-e630-4415-971b-38a1792fd3f1.JPG"
+      alt="<%= event.title %>"
+      class="vertex-booking-image"
+    >
+  </div>
 
-          <div class="vertex-booking-price">
+  <div class="vertex-booking-content">
+    <h3>
+      Reserve your place<br>
+      in the Mehfil.
+    </h3>
 
-            <small>
-              TICKETS FROM
-            </small>
+    <div class="vertex-booking-divider"></div>
 
-            <strong>
-              ₹<%= event.price %>
-            </strong>
+    <div class="vertex-booking-price">
+      <small>TICKETS FROM</small>
+      <strong>₹<%= event.price %></strong>
+      <span>onwards</span>
+    </div>
 
-            <span>
-              onwards
-            </span>
+    <a href="/book/<%= event.id %>" class="vertex-book-btn">
+      <span>Book Now</span>
+      <span>→</span>
+    </a>
+  </div>
 
-          </div>
-
-          <div class="vertex-availability">
-            <span></span>
-            Available
-          </div>
-
-          <a
-            href="/book/<%= event.id %>"
-            class="vertex-book-btn"
-          >
-            <span>Book Now</span>
-            <span>→</span>
-          </a>
-
-        </aside>
+</aside>
 
       </div>
 

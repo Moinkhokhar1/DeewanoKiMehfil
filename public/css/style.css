@@ -1,4 +1,4 @@
-:root {
+/*:root {
   --primary: #e2434f;
   --primary-dark: #c92f3a;
   --dark: #1a1a2e;
@@ -25,8 +25,6 @@ body {
 
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
-
-/* ---------- Top bar ---------- */
 .topbar {
   background: var(--dark);
   color: #fff;
@@ -72,7 +70,6 @@ img { max-width: 100%; display: block; }
   font-size: 0.8rem;
 }
 
-/* ---------- Search ---------- */
 .search-section { margin-bottom: 16px; }
 .search-form { display: flex; gap: 8px; }
 .search-form input {
@@ -93,7 +90,6 @@ img { max-width: 100%; display: block; }
 }
 
 
-/* ---------- Event grid / cards ---------- */
 .event-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -138,7 +134,6 @@ img { max-width: 100%; display: block; }
 .no-image.small { width: 100%; height: 100%; min-height: 70px; border-radius: 10px; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); grid-column: 1/-1; }
 
-/* ---------- Carousel ---------- */
 .event-detail { max-width: 640px; margin: 0 auto; padding-bottom: 110px; }
 .back-link { display: inline-block; margin-bottom: 12px; color: var(--muted); font-size: 0.9rem; }
 .carousel {
@@ -204,7 +199,6 @@ img { max-width: 100%; display: block; }
 .price-tag { font-weight: 700; font-size: 1.05rem; }
 .avail-tag { color: var(--success); font-size: 0.8rem; }
 
-/* ---------- Buttons ---------- */
 .btn-primary {
   background: var(--primary); color: #fff; border: none;
   padding: 12px 22px; border-radius: 10px; font-weight: 700; cursor: pointer;
@@ -219,7 +213,6 @@ img { max-width: 100%; display: block; }
 .btn-outline.danger { color: var(--danger); border-color: var(--danger); }
 .full-width { width: 100%; }
 
-/* ---------- Forms ---------- */
 .form-page { max-width: 520px; margin: 0 auto; }
 .form-page h1 { margin-bottom: 4px; }
 .form-sub { color: var(--muted); margin-top: 0; }
@@ -259,7 +252,6 @@ img { max-width: 100%; display: block; }
   font-size: 0.9rem; margin: 12px 0;
 }
 
-/* ---------- Checkout / QR ---------- */
 .order-summary {
   background: var(--card-bg); border-radius: 12px; padding: 16px; margin: 12px 0;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -274,7 +266,6 @@ img { max-width: 100%; display: block; }
 .qr-image.small { max-width: 140px; }
 .payment-note { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
 
-/* ---------- Ticket ---------- */
 .ticket-page { max-width: 480px; margin: 0 auto; }
 .ticket-card {
   background: #fff; border-radius: 18px; overflow: hidden;
@@ -293,7 +284,6 @@ img { max-width: 100%; display: block; }
 .ticket-qr img { width: 120px; height: 120px; }
 .ticket-actions { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
 
-/* ---------- Bookings list ---------- */
 .booking-row {
   display: flex; gap: 12px; background: var(--card-bg); border-radius: 12px;
   padding: 12px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); align-items: center;
@@ -313,7 +303,6 @@ img { max-width: 100%; display: block; }
 .status-confirmed { background: #e6f4ea; color: var(--success); }
 .status-rejected { background: #fdecea; color: var(--danger); }
 
-/* ---------- Admin ---------- */
 .admin-body { background: var(--bg); }
 .admin-topbar {
   background: var(--dark); color: #fff; padding: 12px 16px;
@@ -407,7 +396,6 @@ img { max-width: 100%; display: block; }
 .reject-form { display: flex; gap: 8px; align-items: center; }
 .reject-form input { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 800px) {
   .admin-menu-toggle { display: block; }
   .admin-sidebar {
@@ -423,4 +411,11 @@ img { max-width: 100%; display: block; }
   .event-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .ticket-bottom { flex-direction: column; align-items: flex-start; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+*/
+html,
+body {
+    background: #fff !important;
+    background-image: none !important;
+    color: #000 !important;
 }

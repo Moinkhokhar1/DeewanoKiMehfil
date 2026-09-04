@@ -1,4 +1,4 @@
-<% pageTitle = 'EventBook - Discover Events' %>
+<!-- <% pageTitle = 'EventBook - Discover Events' %>
 <%- include('partials/header') %>
 
 <section class="search-section">
@@ -37,4 +37,74 @@
   <% }) %>
 </section>
 
-<%- include('partials/footer') %>
+<%- include('partials/footer') %> -->
+<style>
+    @font-face {
+        font-family: "Vercetti";
+        src: url("/fonts/Vercetti-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000 !important;
+    }
+
+    /* Hide existing page */
+    body > * {
+        visibility: hidden;
+    }
+
+    /* Black neon atmosphere */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9998;
+        visibility: visible;
+
+        background:
+            radial-gradient(
+                circle at 50% 50%,
+                rgba(105, 55, 20, 0.22) 0%,
+                rgba(45, 20, 5, 0.10) 30%,
+                #000 72%
+            );
+
+        box-shadow:
+            inset 0 0 180px rgba(130, 70, 25, 0.18);
+    }
+
+    /* Message */
+    body::after {
+        content: "Tickets Out Soon";
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        visibility: visible;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: "Vercetti", sans-serif;
+        font-size: clamp(45px, 7vw, 100px);
+        font-weight: 400;
+        letter-spacing: 2px;
+        text-align: center;
+
+        color: #a87543;
+
+        text-shadow:
+            0 0 6px rgba(168, 117, 67, 0.95),
+            0 0 16px rgba(168, 117, 67, 0.8),
+            0 0 35px rgba(168, 117, 67, 0.55),
+            0 0 70px rgba(120, 65, 20, 0.4);
+    }
+</style>

@@ -2703,7 +2703,7 @@ img { max-width: 100%; display: block; }
 
   color: #c79432;
 
-  font-size: 17px;
+  font-size: 30px;
 
   flex-shrink: 0;
 }
@@ -2904,12 +2904,36 @@ img { max-width: 100%; display: block; }
    BOOKING CARD
    ========================================================= */
 
-   .vertex-booking-card {
+/* .vertex-booking-card {
   position: sticky;
   top: 95px;
 
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
+  min-height: 220px;
+  overflow: hidden;
+
+  padding: 30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 24, 19, 0.96),
+      rgba(14, 12, 10, 0.98)
+    );
+  border: 1px solid #393027;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+} */
+.vertex-booking-card {
+  position: sticky;
+  top: 95px;
+
+  display: flex;
+  flex-direction: column;
   min-height: 220px;
   overflow: hidden;
 
@@ -6000,9 +6024,763 @@ margin-right: 28px;
   justify-content: center;
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* =========================================================
+   VERTEX — MY BOOKINGS (standalone stylesheet)
+   Sufi Mehfil Theme
+   Load this file AFTER the shared theme stylesheet.
+   Uses .vertex-bookingrow-* namespace so it can never
+   collide with .vertex-booking-card / -image / -content
+   on the event-detail page.
+   ========================================================= */
 
+.vertex-bookings-page {
+  width: 100%;
+  min-height: calc(100vh - 76px);
+
+  padding: 80px 24px 110px;
+
+  background:
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(112, 57, 21, 0.16),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 85% 70%,
+      rgba(92, 48, 18, 0.10),
+      transparent 38%
+    ),
+    #080706;
+
+  color: #f5eee4;
+}
+
+
+.vertex-bookings-container {
+  width: min(1160px, 100%);
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.vertex-bookings-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin-bottom: 48px;
+  padding-bottom: 34px;
+
+  border-bottom: 1px solid #29241f;
+}
+
+.vertex-bookings-heading .vertex-eyebrow {
+  margin-bottom: 12px;
+}
+
+.vertex-bookings-heading h1 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(44px, 6vw, 68px);
+  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -2.5px;
+}
+
+.vertex-bookings-heading p {
+  margin: 16px 0 0;
+
+  color: #756d65;
+  font-family: Georgia, serif;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   BROWSE BUTTON
+   ========================================================= */
+
+.vertex-browse-btn {
+  min-width: 170px;
+  height: 50px;
+
+  padding: 0 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  text-decoration: none;
+  color: #c79432;
+
+  border: 1px solid #39312a;
+  background: rgba(255, 255, 255, 0.015);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.vertex-browse-btn:hover {
+  border-color: rgba(199, 148, 50, 0.45);
+  background: rgba(199, 148, 50, 0.04);
+}
+
+.vertex-browse-btn span:last-child {
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   BOOKING LIST
+   ========================================================= */
+
+.vertex-bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+/* =========================================================
+   BOOKING ROW CARD
+   (namespaced as .vertex-bookingrow-* — do not rename
+   back to .vertex-booking-card, it collides with the
+   event-detail sticky booking widget)
+   ========================================================= */
+
+.vertex-bookingrow-card {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+
+  min-height: 220px;
+  overflow: hidden;
+
+  background: #11100e;
+  border: 1px solid #29241f;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.vertex-bookingrow-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(199, 148, 50, 0.38);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.vertex-bookingrow-image {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+
+  background: #18130f;
+}
+
+.vertex-bookingrow-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 60%,
+      rgba(8, 7, 6, 0.45)
+    );
+
+  pointer-events: none;
+}
+
+.vertex-bookingrow-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.vertex-bookingrow-card:hover .vertex-bookingrow-image img {
+  transform: scale(1.04);
+}
+
+.vertex-booking-no-image {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #8e6935;
+  font-size: 32px;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.vertex-bookingrow-content {
+  min-width: 0;
+  padding: 30px 32px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+.vertex-booking-main {
+  min-width: 0;
+}
+
+.vertex-booking-label {
+  display: block;
+  margin-bottom: 12px;
+
+  color: #a67a35;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.vertex-booking-main h2 {
+  margin: 0;
+
+  color: #f1e9df;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   DETAILS
+   ========================================================= */
+
+.vertex-booking-details {
+  margin-top: 28px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.vertex-booking-details span {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  color: #817970;
+  font-size: 12px;
+}
+
+.vertex-booking-details b {
+  color: #554d46;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+.vertex-booking-side {
+  min-width: 170px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.vertex-booking-tickets {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.vertex-booking-tickets span {
+  color: #69615a;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vertex-booking-tickets strong {
+  color: #c79432;
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.vertex-status {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 10px;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+
+  border: 1px solid;
+}
+
+.vertex-status.status-confirmed {
+  color: #b99a5d;
+  background: rgba(199, 148, 50, 0.06);
+  border-color: rgba(199, 148, 50, 0.25);
+}
+
+.vertex-status.status-pending_payment,
+.vertex-status.status-pending_verification {
+  color: #a98b62;
+  background: rgba(169, 139, 98, 0.05);
+  border-color: rgba(169, 139, 98, 0.20);
+}
+
+.vertex-status.status-rejected {
+  color: #a76f56;
+  background: rgba(167, 111, 86, 0.05);
+  border-color: rgba(167, 111, 86, 0.20);
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+   ========================================================= */
+
+.vertex-booking-view {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #a89e94;
+  text-decoration: none;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  transition: color 0.2s ease;
+}
+
+.vertex-booking-view:hover {
+  color: #c79432;
+}
+
+.vertex-booking-view span {
+  color: #c79432;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.vertex-bookings-empty {
+  position: relative;
+
+  max-width: 700px;
+  margin: 70px auto 0;
+  padding: 75px 40px;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(112, 57, 21, 0.12),
+      transparent 65%
+    ),
+    #0e0d0b;
+
+  border: 1px solid #29241f;
+}
+
+.vertex-empty-symbol {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #c79432;
+  border: 1px solid rgba(199, 148, 50, 0.28);
+  background: rgba(199, 148, 50, 0.04);
+
+  font-size: 25px;
+
+  box-shadow: 0 0 50px rgba(199, 148, 50, 0.06);
+}
+
+.vertex-bookings-empty .vertex-eyebrow {
+  margin-bottom: 14px;
+}
+
+.vertex-bookings-empty h2 {
+  margin: 0;
+
+  color: #f2ebe1;
+  font-family: Georgia, serif;
+  font-size: 38px;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+
+.vertex-bookings-empty p {
+  max-width: 420px;
+  margin: 16px auto 30px;
+
+  color: #746c64;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .vertex-bookingrow-card {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+
+  .vertex-bookingrow-content {
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .vertex-booking-side {
+    min-width: 140px;
+  }
+
+}
+
+
+@media (max-width: 680px) {
+
+  .vertex-bookings-page {
+    padding: 50px 16px 80px;
+  }
+
+  .vertex-bookings-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .vertex-browse-btn {
+    width: 100%;
+  }
+
+  .vertex-bookingrow-card {
+    grid-template-columns: 1fr;
+  }
+
+  .vertex-bookingrow-image {
+    height: 240px;
+    min-height: 240px;
+  }
+
+  .vertex-bookingrow-content {
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .vertex-booking-side {
+    min-width: 0;
+    align-items: flex-start;
+
+    padding-top: 20px;
+    border-top: 1px solid #29241f;
+  }
+
+  .vertex-booking-tickets {
+    align-items: flex-start;
+  }
+
+  .vertex-booking-view {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .vertex-bookings-heading h1 {
+    font-size: 42px;
+  }
+
+  .vertex-bookingrow-image {
+    height: 210px;
+    min-height: 210px;
+  }
+
+  .vertex-bookings-empty {
+    padding: 55px 22px;
+  }
+
+  .vertex-bookings-empty h2 {
+    font-size: 31px;
+  }
+
+}
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* =========================================================
+   VERTEX — SITE FOOTER
+   Sufi Mehfil Theme
+   ========================================================= */
 
+.vertex-footer {
+  position: relative;
+  overflow: hidden;
+
+  padding: 70px 24px 30px;
+
+  background: #080706;
+  border-top: 1px solid rgba(199, 148, 50, 0.14);
+
+  color: #f5eee4;
+}
+
+.vertex-footer-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  left: 50%;
+  top: -220px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(137, 72, 26, 0.10);
+  filter: blur(110px);
+
+  pointer-events: none;
+}
+
+
+.vertex-footer-container {
+  position: relative;
+  z-index: 1;
+
+  width: min(1160px, 100%);
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   TOP ROW
+   ========================================================= */
+
+.vertex-footer-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+
+/* Brand */
+
+.vertex-footer-brand {
+  max-width: 380px;
+}
+
+.vertex-footer-logo {
+  display: inline-block;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 2px;
+
+  color: #f5eee4;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.vertex-footer-logo:hover {
+  color: #c79432;
+}
+
+.vertex-footer-tagline {
+  margin: 14px 0 0;
+
+  color: #746c64;
+
+  font-family: Georgia, serif;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.vertex-footer-tagline em {
+  color: #b88732;
+  font-style: normal;
+}
+
+
+/* Social */
+
+.vertex-footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.vertex-footer-social-label {
+  color: #665e56;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.vertex-footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vertex-footer-social-links a {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #29231e;
+  border-radius: 50%;
+
+  color: #a89e94;
+
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.vertex-footer-social-links a:hover {
+  color: #c79432;
+
+  border-color: rgba(199, 148, 50, 0.45);
+  background: rgba(199, 148, 50, 0.06);
+
+  transform: translateY(-2px);
+}
+
+.vertex-footer-social-links svg {
+  width: 17px;
+  height: 17px;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.vertex-footer-divider {
+  height: 1px;
+  margin: 45px 0 24px;
+
+  background: #221d19;
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.vertex-footer-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.vertex-footer-bottom p {
+  margin: 0;
+
+  color: #57504a;
+
+  font-size: 11.5px;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+  .vertex-footer {
+    padding: 55px 18px 24px;
+  }
+
+  .vertex-footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .vertex-footer-social {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .vertex-footer-divider {
+    margin: 35px 0 20px;
+  }
+
+}
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ */

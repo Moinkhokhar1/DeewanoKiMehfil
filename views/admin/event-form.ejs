@@ -87,6 +87,22 @@
     </div>
   <% } %>
 
+  <label for="priceinfo_image">Priceinfo (upload from device)</label>
+  <input type="file" id="priceinfo_image" name="priceinfo_image" accept="image/*" />
+  <p class="fine-print">Shown on the event page under "Reserve your place in the Mehfil." Max 8MB.</p>
+
+  <% if (event && event.priceinfo_image) { %>
+    <div class="existing-images">
+      <p class="fine-print">Current Priceinfo image (check to remove):</p>
+      <div class="existing-images-grid">
+        <label class="existing-image-item">
+          <img src="<%= event.priceinfo_image %>" alt="priceinfo" />
+          <span><input type="checkbox" name="remove_priceinfo_image" value="1" /> Remove</span>
+        </label>
+      </div>
+    </div>
+  <% } %>
+
   <% if (event) { %>
     <label class="checkbox-label">
       <input type="checkbox" name="is_published" <%= event.is_published ? 'checked' : '' %> />

@@ -26,12 +26,13 @@ router.get('/event/:id', (req, res) => {
   const event = db.prepare('SELECT * FROM events WHERE id = ?').get(req.params.id);
   if (!event) return res.status(404).render('404');
   parseImages(event);
+  const categories = db.prepare('SELECT * FROM ticket_categories WHERE event_id = ? ORDER BY sort_order, id').all(event.id);
   let interested = false;
   if (req.session.buyerId) {
     const row = db.prepare('SELECT 1 FROM interests WHERE event_id = ? AND buyer_id = ?').get(event.id, req.session.buyerId);
     interested = !!row;
   }
-  res.render('event', { event, interested });
+  res.render('event', { event, categories, interested });
 });
 
 router.post('/event/:id/interest', (req, res) => {

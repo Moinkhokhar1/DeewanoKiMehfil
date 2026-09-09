@@ -120,6 +120,10 @@ if (!columnExists('events', 'terms_conditions')) {
   db.exec("ALTER TABLE events ADD COLUMN terms_conditions TEXT DEFAULT ''");
 }
 
+if (!columnExists('events', 'priceinfo_image')) {
+  db.exec('ALTER TABLE events ADD COLUMN priceinfo_image TEXT');
+}
+
 // --- Migration: give any event with no categories yet a "General" category using its old single price ---
 db.prepare('SELECT id, price FROM events').all().forEach(ev => {
   const count = db.prepare('SELECT COUNT(*) c FROM ticket_categories WHERE event_id = ?').get(ev.id).c;

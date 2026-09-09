@@ -333,12 +333,22 @@
       in the Mehfil.
     </h3>
 
+    <% if (event.priceinfo_image) { %>
+      <div class="vertex-priceinfo">
+        <img src="<%= event.priceinfo_image %>" alt="Price info" />
+      </div>
+    <% } %>
+
     <div class="vertex-booking-divider"></div>
 
-    <div class="vertex-booking-price">
-      <small>TICKETS FROM</small>
-      <strong>₹<%= event.price %></strong>
-      <span>onwards</span>
+    <div class="vertex-booking-categories">
+      <small>TICKET CATEGORIES</small>
+      <% categories.forEach(cat => { %>
+        <div class="vertex-booking-cat-row">
+          <span class="vertex-booking-cat-name"><%= cat.name %></span>
+          <span class="vertex-booking-cat-price">₹<%= cat.price %></span>
+        </div>
+      <% }) %>
     </div>
 
     <a href="/book/<%= event.id %>" class="vertex-book-btn">

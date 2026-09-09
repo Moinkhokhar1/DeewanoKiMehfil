@@ -3051,6 +3051,26 @@ img { max-width: 100%; display: block; }
 }
 
 
+.vertex-priceinfo {
+  margin-top: 18px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  border: 1px solid #393027;
+}
+
+
+.vertex-priceinfo img {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+}
+
+
 .vertex-booking-price {
   display: flex;
 
@@ -3085,6 +3105,63 @@ img { max-width: 100%; display: block; }
   color: #746b62;
 
   font-size: 11px;
+}
+
+
+.vertex-booking-categories {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+.vertex-booking-categories > small {
+  color: #665e56;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+}
+
+
+.vertex-booking-cat-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid #302a24;
+}
+
+
+.vertex-booking-cat-row:last-child {
+  border-bottom: none;
+
+  padding-bottom: 0;
+}
+
+
+.vertex-booking-cat-name {
+  color: #d8cfc2;
+
+  font-family: Georgia, serif;
+  font-size: 15px;
+}
+
+
+.vertex-booking-cat-price {
+  color: #c79432;
+
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 500;
+
+  white-space: nowrap;
 }
 
 

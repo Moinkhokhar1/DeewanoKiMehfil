@@ -26,7 +26,8 @@ const imageFilter = (req, file, cb) => {
 const uploadEventImages = multer({
   storage: makeStorage('events'),
   fileFilter: imageFilter,
-  limits: { fileSize: 8 * 1024 * 1024, files: 8 }
+  // 8 event photos + 1 priceinfo image = 9 total files per request
+  limits: { fileSize: 8 * 1024 * 1024, files: 9 }
 });
 
 const uploadQr = multer({

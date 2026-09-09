@@ -79,7 +79,7 @@ router.get('/events/new', requireAdmin, (req, res) => {
 });
 
 router.post('/events/new', requireAdmin, (req, res, next) => {
-  uploadEventImages.array('images', 8)(req, res, (err) => {
+  uploadEventImages.fields([{ name: 'images', maxCount: 8 }, { name: 'priceinfo_image', maxCount: 1 }])(req, res, (err) => {
     if (err) return res.render('admin/event-form', { event: null, categories: [], error: err.message });
     next();
   });
@@ -94,13 +94,15 @@ const { title, category, description, venue, start_date, end_date, event_time, d
     return res.render('admin/event-form', { event: null, categories: [], error: 'Add at least one ticket category with a name and price.' });
   }
 
-  const images = (req.files || []).map(f => '/uploads/events/' + f.filename);
+  const images = (req.files?.images || []).map(f => '/uploads/events/' + f.filename);
+  const priceinfoFile = (req.files?.priceinfo_image || [])[0];
+  const priceinfoImage = priceinfoFile ? '/uploads/events/' + priceinfoFile.filename : null;
   const startingPrice = Math.min(...cats.map(c => c.price));
 
-const info = db.prepare(`INSERT INTO events (title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions, price, images)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
+const info = db.prepare(`INSERT INTO events (title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions, price, images, priceinfo_image)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
   title.trim(), category || '', description || '', venue || '', start_date, end_date || start_date,
-  event_time || '', duration || '', age_limit || '', languages || '', terms_conditions || '', startingPrice, JSON.stringify(images)
+  event_time || '', duration || '', age_limit || '', languages || '', terms_conditions || '', startingPrice, JSON.stringify(images), priceinfoImage
 );
 
   const insertCat = db.prepare('INSERT INTO ticket_categories (event_id, name, price, sort_order) VALUES (?, ?, ?, ?)');
@@ -117,7 +119,7 @@ router.get('/events/:id/edit', requireAdmin, (req, res) => {
 });
 
 router.post('/events/:id/edit', requireAdmin, (req, res, next) => {
-  uploadEventImages.array('images', 8)(req, res, (err) => {
+  uploadEventImages.fields([{ name: 'images', maxCount: 8 }, { name: 'priceinfo_image', maxCount: 1 }])(req, res, (err) => {
     if (err) {
       const event = db.prepare('SELECT * FROM events WHERE id = ?').get(req.params.id);
       parseImages(event);
@@ -128,7 +130,7 @@ router.post('/events/:id/edit', requireAdmin, (req, res, next) => {
 }, (req, res) => {
   const event = db.prepare('SELECT * FROM events WHERE id = ?').get(req.params.id);
   if (!event) return res.status(404).render('404');
- const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions, remove_images, is_published } = req.body;
+ const { title, category, description, venue, start_date, end_date, event_time, duration, age_limit, languages, terms_conditions, remove_images, remove_priceinfo_image, is_published } = req.body;
 
   const cats = parseCategories(req.body);
   if (cats.length === 0) {
@@ -139,13 +141,18 @@ router.post('/events/:id/edit', requireAdmin, (req, res, next) => {
   let images = JSON.parse(event.images || '[]');
   const toRemove = remove_images ? (Array.isArray(remove_images) ? remove_images : [remove_images]) : [];
   images = images.filter(img => !toRemove.includes(img));
-  const newImages = (req.files || []).map(f => '/uploads/events/' + f.filename);
+  const newImages = (req.files?.images || []).map(f => '/uploads/events/' + f.filename);
   images = images.concat(newImages);
 
+  let priceinfoImage = event.priceinfo_image || null;
+  if (remove_priceinfo_image) priceinfoImage = null;
+  const newPriceinfoFile = (req.files?.priceinfo_image || [])[0];
+  if (newPriceinfoFile) priceinfoImage = '/uploads/events/' + newPriceinfoFile.filename;
+
   const startingPrice = Math.min(...cats.map(c => c.price));
-db.prepare(`UPDATE events SET title=?, category=?, description=?, venue=?, start_date=?, end_date=?, event_time=?, duration=?, age_limit=?, languages=?, terms_conditions=?, price=?, images=?, is_published=? WHERE id=?`)
+db.prepare(`UPDATE events SET title=?, category=?, description=?, venue=?, start_date=?, end_date=?, event_time=?, duration=?, age_limit=?, languages=?, terms_conditions=?, price=?, images=?, priceinfo_image=?, is_published=? WHERE id=?`)
   .run(title.trim(), category || '', description || '', venue || '', start_date, end_date || start_date,
-    event_time || '', duration || '', age_limit || '', languages || '', terms_conditions || '', startingPrice, JSON.stringify(images),
+    event_time || '', duration || '', age_limit || '', languages || '', terms_conditions || '', startingPrice, JSON.stringify(images), priceinfoImage,
     is_published ? 1 : 0, event.id);
 
   db.prepare('DELETE FROM ticket_categories WHERE event_id = ?').run(event.id);
